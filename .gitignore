@@ -45,10 +45,14 @@ ENV/
 # Allow .dvc directory and .dvc files to be tracked
 !.dvc/
 !.dvc/**
-!*.dvc
+!.dvcignore
+# Allow .dvc files in data directory
+!data/**/*.dvc
 
 # Data files (tracked by DVC)
-data/raw/
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/*.dvc
 data/processed/
 *.csv
 *.parquet

@@ -1,0 +1,4 @@
+[core]
+    remote = localstorage
+['remote "localstorage"']
+    url = /home/haben/Weldsh/KAM/End-to-end-insurance-analytics/data_storage
