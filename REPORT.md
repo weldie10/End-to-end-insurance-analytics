@@ -234,6 +234,41 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 - [x] Task-specific branches created (main, task-1, task-2)
 - [x] Pull request workflow established
 
+#### Task 1 Priority Tables
+
+**Table 1: Git Repository Setup Priorities**
+
+| Priority | Component | Description | Status |
+|----------|-----------|-------------|--------|
+| **P0 (Critical)** | Repository Initialization | Initialize git repository with proper structure | ✅ Completed |
+| **P0 (Critical)** | .gitignore Configuration | Exclude venv, cache, data files, and sensitive information | ✅ Completed |
+| **P1 (High)** | Branch Strategy | Create main, task-1, task-2 branches | ✅ Completed |
+| **P1 (High)** | Initial Commit | Commit project structure and core files | ✅ Completed |
+| **P2 (Medium)** | Commit History | Establish meaningful commit message conventions | ✅ Completed |
+| **P2 (Medium)** | Remote Repository | Connect to GitHub remote repository | ✅ Completed |
+
+**Table 2: Documentation & Code Quality Priorities**
+
+| Priority | Component | Description | Status |
+|----------|-----------|-------------|--------|
+| **P0 (Critical)** | README.md | Comprehensive project documentation with setup instructions | ✅ Completed |
+| **P0 (Critical)** | Project Structure | Modular OOP architecture with clear directory structure | ✅ Completed |
+| **P1 (High)** | Code Organization | Separate modules for data, EDA, statistics, models, utils | ✅ Completed |
+| **P1 (High)** | Requirements.txt | Complete dependency list with versions | ✅ Completed |
+| **P2 (Medium)** | Setup.py | Package installation configuration | ✅ Completed |
+| **P2 (Medium)** | Example Usage | Demonstration script showing OOP usage | ✅ Completed |
+
+**Table 3: CI/CD & Workflow Priorities**
+
+| Priority | Component | Description | Status |
+|----------|-----------|-------------|--------|
+| **P0 (Critical)** | GitHub Actions Workflow | Automated linting and testing pipeline | ✅ Completed |
+| **P1 (High)** | Pull Request Template | Standardized PR template for code review | ✅ Completed |
+| **P1 (High)** | Branch Protection | Establish branch workflow (main, task branches) | ✅ Completed |
+| **P2 (Medium)** | Code Linting | Flake8 and Black formatting checks | ✅ Configured |
+| **P2 (Medium)** | Automated Testing | Pytest integration for unit tests | ✅ Configured |
+| **P3 (Low)** | Code Coverage | Coverage reporting in CI pipeline | ⏳ Planned |
+
 ### Task 2: Data Version Control (DVC) ✅ COMPLETED
 - [x] DVC initialized in repository
 - [x] Local remote storage configured
