@@ -1,59 +1,65 @@
 # Insurance Risk Analytics & Predictive Modeling
 
-Risk analytics and predictive modeling for **AlphaCare Insurance Solutions** car insurance in South Africa. Analyze historical claim data (Feb 2014 - Aug 2015) to discover low-risk segments and optimize premium pricing.
+Risk analytics and predictive modeling platform for AlphaCare Insurance Solutions. Analyzes historical car insurance claim data (Feb 2014 - Aug 2015) to identify low-risk segments and optimize premium pricing strategies.
 
-## Quick Start
+## Features
+
+- **Data Loading & Preprocessing**: Automated data pipeline with quality assessment
+- **Exploratory Data Analysis**: Loss ratio analysis, outlier detection, temporal trends
+- **Statistical Testing**: A/B hypothesis testing for risk differences across dimensions
+- **Machine Learning**: Predictive models for claims and premium optimization
+- **Data Version Control**: DVC integration for reproducible data pipelines
+
+## Installation
 
 ```bash
-# Setup
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
-
-# Run example
-python example_usage.py
 ```
 
-## Project Structure
-
-```
-src/alphacare/          # OOP classes (DataLoader, EDAAnalyzer, HypothesisTester, ModelTrainer)
-data/                   # DVC-tracked data (raw/processed)
-notebooks/              # Analysis notebooks
-Data/                   # Source data file
-```
-
-## Key Classes
-
-- **`DataLoader`**: Load and preprocess data from `Data/MachineLearningRating_v3.txt`
-- **`EDAAnalyzer`**: EDA, loss ratio analysis, outlier detection, visualizations
-- **`HypothesisTester`**: A/B testing for risk differences (provinces, zipcodes, gender)
-- **`LinearRegressionModel`**: Predict claims by zipcode
-- **`ModelTrainer`**: ML models for premium prediction (Random Forest, Gradient Boosting)
-
-## Usage
+## Quick Start
 
 ```python
 from alphacare.data import DataLoader
 from alphacare.eda import EDAAnalyzer
 from alphacare.statistics import HypothesisTester
 
-# Load data
+# Load and preprocess data
 loader = DataLoader(data_path="Data")
 data = loader.load_data("MachineLearningRating_v3.txt")
 processed = loader.preprocess_data()
 
-# EDA
+# Perform EDA
 eda = EDAAnalyzer(processed)
 loss_ratio = eda.calculate_loss_ratio(group_by=["Province", "VehicleType", "Gender"])
 
-# Hypothesis testing
+# Run hypothesis tests
 tester = HypothesisTester(processed, alpha=0.05)
 results = tester.run_all_tests()
 ```
 
-## DVC Setup
+## Project Structure
+
+```
+src/alphacare/     # Core OOP classes
+data/              # DVC-tracked data (raw/processed)
+notebooks/         # Analysis notebooks
+Data/              # Source data files
+```
+
+## Core Classes
+
+- **`DataLoader`**: Data loading and preprocessing
+- **`EDAAnalyzer`**: Exploratory data analysis and visualizations
+- **`HypothesisTester`**: Statistical hypothesis testing
+- **`LinearRegressionModel`**: Zipcode-based claim prediction
+- **`ModelTrainer`**: Premium prediction models
+
+## Data Version Control
+
+Data files are tracked using DVC:
 
 ```bash
 dvc init
@@ -62,22 +68,10 @@ dvc add data/raw/MachineLearningRating_v3.txt
 dvc push
 ```
 
-## Analysis Questions
-
-1. Overall Loss Ratio and variation by Province, VehicleType, Gender
-2. Distributions and outliers in financial variables
-3. Temporal trends in claim frequency/severity
-4. Vehicle make/model with highest/lowest claims
-5. Hypothesis tests: Risk differences by province, zipcode, gender; margin differences by zipcode
-
 ## Technologies
 
-Python 3.8+, Pandas, NumPy, Scikit-learn, Matplotlib/Seaborn, SciPy, DVC, Jupyter
-
-## Key Dates
-
-- Interim Submission: 8:00 PM UTC, Sunday, 07 Dec 2025
-- Final Submission: 8:00 PM UTC, Tuesday, 09 Dec 2025
+Python 3.8+, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, SciPy, DVC, Jupyter
 
 ---
-**Team**: Kerod, Mahbubah, Filimon | **License**: Proprietary - AlphaCare Insurance Solutions
+
+**License**: Proprietary - AlphaCare Insurance Solutions
