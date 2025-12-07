@@ -3,13 +3,20 @@
 
 **AlphaCare Insurance Solutions (ACIS)**  
 **Date**: December 2025  
-**Project Duration**: February 2014 - August 2015 (Data Period)
+**Data Period**: February 2014 - August 2015
 
 ---
 
 ## Executive Summary
 
-This project develops a comprehensive risk analytics and predictive modeling platform for car insurance in South Africa. The analysis of historical claim data enables identification of low-risk segments, optimization of premium pricing, and data-driven marketing strategies to attract new clients while maintaining profitability.
+This project develops a comprehensive risk analytics and predictive modeling platform for car insurance in South Africa. Through analysis of ~1 million historical claim records, we identify low-risk segments, optimize premium pricing, and enable data-driven marketing strategies to attract new clients while maintaining profitability.
+
+**Key Findings**:
+- Overall portfolio loss ratio calculated and analyzed across multiple dimensions
+- Significant risk variations identified across provinces and vehicle types
+- Temporal trends reveal patterns in claim frequency and severity
+- Vehicle make analysis highlights high and low-risk segments
+- Foundation established for predictive modeling and premium optimization
 
 ---
 
@@ -34,11 +41,12 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 
 ## 2. Methodology
 
-### 2.1 Data Understanding
+### 2.1 Data Overview
 
-**Data Source**: Historical insurance claim data (Feb 2014 - Aug 2015)  
+**Data Source**: Historical insurance claim data  
 **Format**: Pipe-delimited text file (`MachineLearningRating_v3.txt`)  
-**Size**: ~1 million records  
+**Records**: 1,000,098 transactions  
+**Period**: February 2014 - August 2015 (18 months)  
 **Key Variables**:
 - Policy information (PolicyID, TransactionMonth)
 - Client demographics (Gender, MaritalStatus, Province, PostalCode)
@@ -48,299 +56,313 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 
 ### 2.2 Analysis Framework
 
-#### Phase 1: Exploratory Data Analysis (EDA)
+#### Phase 1: Exploratory Data Analysis (EDA) ✅
 - Descriptive statistics and data quality assessment
 - Loss ratio analysis by key dimensions
 - Outlier detection and treatment
 - Temporal trend analysis
 - Vehicle make/model risk profiling
 
-#### Phase 2: Statistical Hypothesis Testing
+#### Phase 2: Statistical Hypothesis Testing (In Progress)
 - Test risk differences across provinces
 - Test risk differences between zipcodes
 - Test margin (profit) differences between zipcodes
 - Test risk differences between genders
 
-#### Phase 3: Predictive Modeling
+#### Phase 3: Predictive Modeling (Planned)
 - Linear regression models by zipcode for claims prediction
 - Machine learning models for premium optimization
 - Feature importance analysis
 - Model evaluation and validation
 
-### 2.3 Technical Stack
+### 2.3 Technical Implementation
 
+- **Architecture**: Object-Oriented Programming (OOP) with modular design
 - **Data Processing**: Pandas, NumPy
 - **Statistical Analysis**: SciPy, Statsmodels
 - **Machine Learning**: Scikit-learn
-- **Visualization**: Matplotlib, Seaborn, Plotly
+- **Visualization**: Matplotlib, Seaborn
 - **Data Version Control**: DVC
 - **Development**: Python 3.8+, Jupyter Notebooks
 
 ---
 
-## 3. Visualization Path
+## 3. Generated Visualizations
 
-### 3.1 Overview Visualizations
+### 3.1 Portfolio Overview Dashboard
+**File**: `reports/visualizations/01_portfolio_overview.png`
 
-#### 3.1.1 Portfolio Overview Dashboard
-**Purpose**: High-level business metrics  
-**Visualizations**:
-- Overall Loss Ratio (TotalClaims/TotalPremium) - KPI card
-- Total Premium vs Total Claims over time - Line chart
-- Claim frequency distribution - Histogram
-- Premium distribution - Box plot
+**Components**:
+- **Overall Loss Ratio KPI**: Key performance indicator showing portfolio-wide loss ratio
+- **Premium vs Claims Over Time**: Dual-axis line chart showing monthly trends
+- **Claim Frequency Distribution**: Histogram of claim amounts (log scale)
+- **Premium Distribution**: Box plot showing premium distribution (log scale)
 
-**Location**: `reports/visualizations/01_portfolio_overview.png`
-
-#### 3.1.2 Data Quality Assessment
-**Purpose**: Understand data completeness and quality  
-**Visualizations**:
-- Missing values heatmap - Heatmap
-- Data completeness by column - Bar chart
-- Data type distribution - Pie chart
-
-**Location**: `reports/visualizations/02_data_quality.png`
-
-### 3.2 Loss Ratio Analysis
-
-#### 3.2.1 Loss Ratio by Province
-**Purpose**: Identify high/low risk provinces  
-**Visualizations**:
-- Loss ratio by province - Horizontal bar chart (sorted)
-- Premium and claims by province - Grouped bar chart
-- Province risk heatmap - Geographic heatmap (if coordinates available)
-
-**Location**: `reports/visualizations/03_loss_ratio_province.png`
-
-#### 3.2.2 Loss Ratio by Vehicle Type
-**Purpose**: Understand vehicle risk profiles  
-**Visualizations**:
-- Loss ratio by vehicle type - Bar chart
-- Claims distribution by vehicle type - Violin plot
-- Premium vs Claims scatter by vehicle type - Scatter plot with color coding
-
-**Location**: `reports/visualizations/04_loss_ratio_vehicle_type.png`
-
-#### 3.2.3 Loss Ratio by Gender
-**Purpose**: Analyze gender-based risk differences  
-**Visualizations**:
-- Loss ratio comparison (Male vs Female) - Grouped bar chart
-- Claims distribution by gender - Box plot
-- Statistical test results visualization - Annotation on chart
-
-**Location**: `reports/visualizations/05_loss_ratio_gender.png`
-
-#### 3.2.4 Multi-Dimensional Loss Ratio
-**Purpose**: Combined analysis across dimensions  
-**Visualizations**:
-- Loss ratio heatmap (Province × VehicleType) - Heatmap
-- Loss ratio treemap - Treemap visualization
-- Interactive dashboard - Plotly dashboard
-
-**Location**: `reports/visualizations/06_loss_ratio_multidimensional.png`
-
-### 3.3 Temporal Analysis
-
-#### 3.3.1 Monthly Trends
-**Purpose**: Understand temporal patterns  
-**Visualizations**:
-- Monthly premium and claims trends - Dual-axis line chart
-- Monthly loss ratio trend - Line chart with trend line
-- Seasonal patterns - Box plot by month
-
-**Location**: `reports/visualizations/07_temporal_trends.png`
-
-#### 3.3.2 Claim Frequency and Severity
-**Purpose**: Analyze claim patterns over time  
-**Visualizations**:
-- Claim frequency over time - Line chart
-- Average claim severity over time - Line chart
-- Claim frequency vs severity scatter - Scatter plot
-
-**Location**: `reports/visualizations/08_claim_patterns.png`
-
-### 3.4 Vehicle Analysis
-
-#### 3.4.1 Top/Bottom Vehicle Makes
-**Purpose**: Identify high/low risk vehicles  
-**Visualizations**:
-- Top 10 makes by total claims - Horizontal bar chart
-- Bottom 10 makes by loss ratio - Horizontal bar chart
-- Make vs Model risk matrix - Heatmap
-
-**Location**: `reports/visualizations/09_vehicle_make_analysis.png`
-
-#### 3.4.2 Vehicle Characteristics
-**Purpose**: Understand vehicle risk factors  
-**Visualizations**:
-- Loss ratio by vehicle age - Line chart
-- Loss ratio by engine size (cubic capacity) - Scatter plot
-- Loss ratio by number of doors - Bar chart
-
-**Location**: `reports/visualizations/10_vehicle_characteristics.png`
-
-### 3.5 Geographic Analysis
-
-#### 3.5.1 Zipcode Risk Analysis
-**Purpose**: Identify high/low risk areas  
-**Visualizations**:
-- Top 20 zipcodes by loss ratio - Horizontal bar chart
-- Zipcode risk distribution - Histogram
-- Geographic risk clustering - Scatter plot (if coordinates available)
-
-**Location**: `reports/visualizations/11_zipcode_risk.png`
-
-#### 3.5.2 Margin Analysis by Location
-**Purpose**: Profitability by geography  
-**Visualizations**:
-- Margin (Premium - Claims) by zipcode - Bar chart
-- Margin vs Risk scatter - Scatter plot
-- Profitability heatmap - Heatmap
-
-**Location**: `reports/visualizations/12_margin_analysis.png`
-
-### 3.6 Statistical Testing Results
-
-#### 3.6.1 Hypothesis Test Summary
-**Purpose**: Present statistical test results  
-**Visualizations**:
-- P-values visualization - Bar chart with significance threshold
-- Test results summary table - Formatted table
-- Effect sizes visualization - Forest plot
-
-**Location**: `reports/visualizations/13_hypothesis_tests.png`
-
-### 3.7 Predictive Modeling
-
-#### 3.7.1 Model Performance
-**Purpose**: Evaluate model quality  
-**Visualizations**:
-- Model comparison (R², RMSE, MAE) - Grouped bar chart
-- Actual vs Predicted scatter - Scatter plot with regression line
-- Residual plots - Scatter plot
-
-**Location**: `reports/visualizations/14_model_performance.png`
-
-#### 3.7.2 Feature Importance
-**Purpose**: Understand model drivers  
-**Visualizations**:
-- Feature importance (top 20) - Horizontal bar chart
-- Feature importance by category - Grouped bar chart
-- SHAP values visualization - Waterfall plot
-
-**Location**: `reports/visualizations/15_feature_importance.png`
-
-#### 3.7.3 Predictions by Zipcode
-**Purpose**: Show zipcode-specific models  
-**Visualizations**:
-- R² scores by zipcode - Bar chart
-- Model performance distribution - Histogram
-- Top performing zipcode models - Table
-
-**Location**: `reports/visualizations/16_zipcode_models.png`
-
-### 3.8 Final Insights Dashboard
-
-#### 3.8.1 Executive Summary Dashboard
-**Purpose**: High-level insights for stakeholders  
-**Visualizations**:
-- Key metrics cards (Loss Ratio, Total Premium, Total Claims)
-- Risk segmentation summary
-- Top recommendations
-- Interactive dashboard combining key visualizations
-
-**Location**: `reports/visualizations/17_executive_dashboard.html` (Interactive)
+**Insights**:
+- Provides high-level view of portfolio health
+- Identifies temporal patterns in premium and claims
+- Highlights distribution characteristics of key financial metrics
 
 ---
 
-## 4. Implementation Plan
+### 3.2 Loss Ratio by Province
+**File**: `reports/visualizations/03_loss_ratio_province.png`
 
-### Phase 1: Data Preparation (Week 1)
-- [x] Data loading and preprocessing
-- [x] Data quality assessment
-- [x] Initial exploratory analysis
+**Visualization**: Horizontal bar chart with color coding:
+- **Red**: High risk (Loss Ratio > 60%)
+- **Orange**: Medium risk (Loss Ratio 40-60%)
+- **Green**: Low risk (Loss Ratio < 40%)
 
-### Phase 2: Exploratory Analysis (Week 1-2)
-- [ ] Loss ratio calculations by all dimensions
-- [ ] Outlier detection and treatment
-- [ ] Temporal trend analysis
-- [ ] Vehicle make/model analysis
+**Insights**:
+- Identifies provinces with highest and lowest risk profiles
+- Enables targeted marketing to low-risk provinces
+- Supports premium adjustment strategies by geography
+- Risk threshold lines (40% and 60%) provide clear segmentation
 
-### Phase 3: Statistical Testing (Week 2)
-- [ ] Hypothesis tests for provinces
-- [ ] Hypothesis tests for zipcodes
-- [ ] Hypothesis tests for gender
-- [ ] Margin difference tests
-
-### Phase 4: Predictive Modeling (Week 2-3)
-- [ ] Linear regression by zipcode
-- [ ] Premium prediction model
-- [ ] Feature engineering
-- [ ] Model evaluation
-
-### Phase 5: Visualization & Reporting (Week 3)
-- [ ] Create all visualizations
-- [ ] Build executive dashboard
-- [ ] Generate final report
-- [ ] Present findings and recommendations
+**Business Action**: Consider premium reductions in green provinces, premium increases in red provinces
 
 ---
 
-## 5. Expected Deliverables
+### 3.3 Loss Ratio by Vehicle Type
+**File**: `reports/visualizations/04_loss_ratio_vehicle_type.png`
 
-1. **Data Pipeline**: Automated data loading and preprocessing
-2. **EDA Report**: Comprehensive exploratory analysis
-3. **Statistical Analysis**: Hypothesis test results and interpretations
-4. **Predictive Models**: Trained models for claims and premium prediction
-5. **Visualizations**: 17+ visualizations covering all analysis dimensions
-6. **Executive Dashboard**: Interactive dashboard for stakeholders
-7. **Final Report**: Complete analysis with recommendations
+**Components**:
+- **Top 10 Vehicle Types by Loss Ratio**: Horizontal bar chart showing highest risk vehicle types
+- **Premium vs Claims Scatter**: Relationship between average premium and claims by vehicle type
 
----
+**Insights**:
+- Identifies vehicle types with highest risk profiles
+- Reveals pricing efficiency (premium vs actual claims)
+- Supports vehicle-specific premium adjustments
+- Highlights opportunities for product segmentation
 
-## 6. Key Metrics & KPIs
-
-### Business Metrics
-- **Overall Loss Ratio**: Target < 60%
-- **Low-Risk Segment Size**: Identify segments with loss ratio < 40%
-- **Premium Optimization**: Improve pricing accuracy by 15-20%
-- **Market Opportunity**: Quantify potential new clients in low-risk segments
-
-### Model Performance Metrics
-- **R² Score**: > 0.7 for premium prediction
-- **RMSE**: Minimize prediction error
-- **Feature Importance**: Identify top 10 risk drivers
+**Business Action**: Adjust premiums for high-risk vehicle types, develop specialized products for low-risk segments
 
 ---
 
-## 7. Risk Factors & Considerations
+### 3.4 Temporal Trends Analysis
+**File**: `reports/visualizations/07_temporal_trends.png`
 
-1. **Data Quality**: Missing values and outliers may affect analysis
-2. **Temporal Changes**: Market conditions may have changed since 2015
-3. **Model Generalization**: Models trained on historical data may need validation
-4. **Regulatory Compliance**: Ensure pricing strategies comply with regulations
-5. **Ethical Considerations**: Avoid discriminatory pricing practices
+**Components**:
+- **Monthly Premium and Claims Trends**: Dual-axis line chart showing 18-month patterns
+- **Monthly Loss Ratio Trend**: Line chart with risk threshold markers and filled area
+
+**Insights**:
+- Reveals seasonal patterns in claims and premiums
+- Identifies periods of increased risk
+- Shows portfolio performance trends over time
+- Risk threshold visualization (40% and 60%) highlights critical periods
+
+**Business Action**: Implement seasonal pricing adjustments, enhance risk management during high-risk periods
+
+---
+
+### 3.5 Vehicle Make Analysis
+**File**: `reports/visualizations/09_vehicle_make_analysis.png`
+
+**Components**:
+- **Top 10 Vehicle Makes by Total Claims**: Bar chart showing makes with highest claim volumes
+- **Top 10 Vehicle Makes by Loss Ratio**: Bar chart showing makes with highest risk (worst performers)
+
+**Insights**:
+- Identifies vehicle makes with highest claim volumes
+- Highlights makes with worst loss ratios (highest risk)
+- Enables make-specific risk assessment
+- Supports targeted marketing and pricing strategies
+
+**Business Action**: 
+- Develop partnerships with low-risk vehicle manufacturers
+- Adjust premiums based on vehicle make risk profiles
+- Create make-specific insurance products
+
+---
+
+## 4. Key Findings
+
+### 4.1 Portfolio-Level Insights
+
+1. **Overall Loss Ratio**: Calculated and monitored as primary KPI
+2. **Temporal Patterns**: Identified seasonal and monthly trends in claims and premiums
+3. **Distribution Characteristics**: Understood claim frequency and premium distributions
+
+### 4.2 Geographic Insights
+
+1. **Province Risk Variation**: Significant differences in loss ratios across provinces
+2. **Low-Risk Provinces**: Identified opportunities for premium reduction and market expansion
+3. **High-Risk Provinces**: Require premium adjustments and enhanced risk management
+
+### 4.3 Vehicle Insights
+
+1. **Vehicle Type Risk**: Clear differentiation in risk profiles across vehicle types
+2. **Make-Specific Risk**: Significant variation in risk by vehicle manufacturer
+3. **Pricing Efficiency**: Opportunities to optimize premium-to-risk ratios
+
+### 4.4 Temporal Insights
+
+1. **Seasonal Patterns**: Identified periods of increased risk
+2. **Trend Analysis**: Portfolio performance trends over 18-month period
+3. **Risk Threshold Monitoring**: Visual tracking of portfolio health against benchmarks
+
+---
+
+## 5. Implementation Status
+
+### Completed ✅
+- [x] Data loading and preprocessing pipeline
+- [x] Exploratory Data Analysis framework
+- [x] Loss ratio calculations by multiple dimensions
+- [x] Temporal trend analysis
+- [x] Vehicle make/model analysis
+- [x] Five key visualizations generated
+- [x] OOP architecture with modular classes
+
+### In Progress 🔄
+- [ ] Statistical hypothesis testing (provinces, zipcodes, gender)
+- [ ] Margin analysis by zipcode
+- [ ] Additional visualizations (12 remaining from plan)
+
+### Planned 📋
+- [ ] Linear regression models by zipcode
+- [ ] Premium prediction machine learning models
+- [ ] Feature importance analysis
+- [ ] Model evaluation and validation
+- [ ] Executive dashboard (interactive)
+- [ ] Final recommendations report
+
+---
+
+## 6. Visualization Path (Remaining)
+
+### Priority Visualizations
+
+1. **Loss Ratio by Gender** - Gender-based risk analysis
+2. **Multi-Dimensional Loss Ratio** - Combined Province × VehicleType analysis
+3. **Zipcode Risk Analysis** - Geographic risk clustering
+4. **Margin Analysis** - Profitability by location
+5. **Hypothesis Test Results** - Statistical test visualizations
+6. **Model Performance** - Predictive model evaluation charts
+7. **Feature Importance** - ML model driver analysis
+
+### Implementation
+
+All visualizations can be generated using the `scripts/generate_visualizations.py` script, which leverages the OOP classes:
+- `DataLoader`: Data loading and preprocessing
+- `EDAAnalyzer`: EDA and visualization generation
+- `HypothesisTester`: Statistical testing (for future visualizations)
+
+---
+
+## 7. Technical Architecture
+
+### Object-Oriented Design
+
+```
+src/alphacare/
+├── data/              # DataLoader: Data loading and preprocessing
+├── eda/               # EDAAnalyzer: Exploratory data analysis
+├── statistics/        # HypothesisTester: Statistical testing
+├── models/            # ModelTrainer, LinearRegressionModel: ML models
+└── utils/             # Logging, DVC management utilities
+```
+
+### Key Features
+
+- **Modular Design**: Each component is a separate, reusable class
+- **Data Version Control**: DVC integration for reproducible pipelines
+- **Comprehensive Logging**: Full logging throughout the pipeline
+- **Error Handling**: Robust error handling and validation
+- **Extensible**: Easy to add new analysis methods and visualizations
 
 ---
 
 ## 8. Next Steps
 
-1. Complete EDA and generate initial visualizations
-2. Run all hypothesis tests and document results
-3. Train and evaluate predictive models
-4. Create comprehensive visualization suite
-5. Develop recommendations for marketing strategy
-6. Present findings to stakeholders
+### Immediate (Week 1)
+1. Complete remaining hypothesis tests
+2. Generate additional visualizations (gender, zipcode, multi-dimensional)
+3. Perform margin analysis by zipcode
+
+### Short-term (Week 2)
+1. Develop linear regression models by zipcode
+2. Build premium prediction models
+3. Analyze feature importance
+4. Create model performance visualizations
+
+### Medium-term (Week 3)
+1. Build interactive executive dashboard
+2. Generate comprehensive recommendations
+3. Present findings to stakeholders
+4. Implement pricing strategy adjustments
 
 ---
 
-## 9. Conclusion
+## 9. Expected Deliverables
 
-This project establishes a foundation for data-driven insurance risk analytics. Through comprehensive EDA, statistical testing, and predictive modeling, we will identify opportunities to optimize premiums, reduce risk, and attract new clients in low-risk segments. The visualization path ensures clear communication of insights to both technical and business stakeholders.
+1. ✅ **Data Pipeline**: Automated data loading and preprocessing
+2. ✅ **EDA Framework**: Comprehensive exploratory analysis classes
+3. ✅ **Initial Visualizations**: 5 key visualizations generated
+4. ⏳ **Statistical Analysis**: Hypothesis test results (in progress)
+5. ⏳ **Predictive Models**: Trained models for claims and premium prediction
+6. ⏳ **Complete Visualization Suite**: 17+ visualizations
+7. ⏳ **Executive Dashboard**: Interactive dashboard for stakeholders
+8. ⏳ **Final Report**: Complete analysis with recommendations
+
+---
+
+## 10. Key Metrics & KPIs
+
+### Business Metrics
+- **Overall Loss Ratio**: Calculated and monitored
+- **Low-Risk Segment Size**: Identified through province and vehicle analysis
+- **Risk Variation**: Quantified across geographic and vehicle dimensions
+- **Temporal Trends**: Tracked over 18-month period
+
+### Technical Metrics
+- **Data Quality**: 1M+ records processed successfully
+- **Visualization Coverage**: 5 of 17 planned visualizations completed
+- **Code Quality**: OOP architecture with modular design
+- **Reproducibility**: DVC integration for data version control
+
+---
+
+## 11. Risk Factors & Considerations
+
+1. **Data Quality**: Missing values handled, outliers identified
+2. **Temporal Changes**: Market conditions may have changed since 2015 data period
+3. **Model Generalization**: Models will need validation on current data
+4. **Regulatory Compliance**: Ensure pricing strategies comply with South African regulations
+5. **Ethical Considerations**: Avoid discriminatory pricing practices
+
+---
+
+## 12. Conclusion
+
+This project establishes a solid foundation for data-driven insurance risk analytics. Through comprehensive EDA and initial visualizations, we have:
+
+- **Identified Key Risk Segments**: Provinces and vehicle types with varying risk profiles
+- **Established Analysis Framework**: OOP architecture enabling scalable analysis
+- **Generated Actionable Insights**: Visualizations supporting business decision-making
+- **Created Reproducible Pipeline**: DVC integration ensures data version control
+
+The visualization path provides clear communication of insights to both technical and business stakeholders. As we progress with hypothesis testing and predictive modeling, we will build upon these foundations to deliver comprehensive recommendations for premium optimization and marketing strategy.
+
+---
+
+## Appendix: Generated Visualizations
+
+All visualizations are saved in `reports/visualizations/`:
+
+1. `01_portfolio_overview.png` - Portfolio overview dashboard
+2. `03_loss_ratio_province.png` - Loss ratio by province
+3. `04_loss_ratio_vehicle_type.png` - Loss ratio by vehicle type
+4. `07_temporal_trends.png` - Temporal trends analysis
+5. `09_vehicle_make_analysis.png` - Vehicle make analysis
+
+**Generation Script**: `scripts/generate_visualizations.py`
 
 ---
 
 **Project Status**: In Progress  
 **Last Updated**: December 2025  
-**Team**: AlphaCare Insurance Solutions Data Analytics Team
-
+**Team**: AlphaCare Insurance Solutions Data Analytics Team  
+**Data Records Analyzed**: 1,000,098
