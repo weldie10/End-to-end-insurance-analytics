@@ -352,11 +352,15 @@ The visualization path provides clear communication of insights to both technica
 
 All visualizations are saved in `reports/visualizations/`:
 
-1. `01_portfolio_overview.png` - Portfolio overview dashboard
-2. `03_loss_ratio_province.png` - Loss ratio by province
-3. `04_loss_ratio_vehicle_type.png` - Loss ratio by vehicle type
-4. `07_temporal_trends.png` - Temporal trends analysis
-5. `09_vehicle_make_analysis.png` - Vehicle make analysis
+1. `01_portfolio_overview.png` - **Portfolio Overview Dashboard**: Overall loss ratio KPI, monthly premium/claims trends, claim frequency distribution, and premium distribution box plot providing high-level portfolio health metrics.
+
+2. `03_loss_ratio_province.png` - **Loss Ratio by Province**: Horizontal bar chart with color-coded risk levels (red: >60%, orange: 40-60%, green: <40%) identifying high and low-risk provinces for targeted marketing and premium adjustments.
+
+3. `04_loss_ratio_vehicle_type.png` - **Loss Ratio by Vehicle Type**: Top 10 vehicle types by loss ratio with premium vs claims scatter plot, enabling vehicle-specific risk assessment and pricing optimization.
+
+4. `07_temporal_trends.png` - **Temporal Trends Analysis**: Dual-axis monthly trends showing premium and claims over 18 months, plus loss ratio trend with risk threshold markers (40% and 60%) highlighting seasonal patterns and portfolio performance.
+
+5. `09_vehicle_make_analysis.png` - **Vehicle Make Analysis**: Top 10 makes by total claims volume and top 10 by loss ratio (highest risk), supporting make-specific risk profiling and partnership opportunities.
 
 **Generation Script**: `scripts/generate_visualizations.py`
 
