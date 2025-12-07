@@ -20,6 +20,25 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 
 ---
 
+## Project Objective
+
+**Primary Objective**: Analyze historical insurance claim data (February 2014 - August 2015) to identify low-risk customer segments and develop predictive models that enable AlphaCare Insurance Solutions to optimize premium pricing, reduce risk exposure, and attract new clients through targeted marketing strategies.
+
+**Specific Objectives**:
+1. **Risk Segmentation**: Identify low-risk customer segments (by province, zipcode, vehicle type, gender) for premium reduction opportunities
+2. **Premium Optimization**: Develop machine learning models to predict optimal premium values based on car features, owner characteristics, and location
+3. **Marketing Strategy**: Enable data-driven marketing to low-risk segments with competitive premium pricing
+4. **Profitability Analysis**: Understand risk and margin differences across geographic and demographic dimensions through statistical hypothesis testing
+5. **Predictive Modeling**: Build models that predict total claims by zipcode and optimal premium values for new policies
+
+**Success Criteria**:
+- Identify at least 3 low-risk segments with loss ratio < 40%
+- Develop predictive models with R² > 0.7 for premium prediction
+- Complete hypothesis testing for all specified dimensions (provinces, zipcodes, gender)
+- Generate comprehensive visualizations supporting business decisions
+
+---
+
 ## 1. Project Goals
 
 ### Primary Objectives
