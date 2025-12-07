@@ -50,6 +50,10 @@ ENV/
 !data/**/*.dvc
 
 # Data files (tracked by DVC)
+# Ignore original Data directory (capital D) - data is tracked via DVC
+Data/
+Data/**
+# Ignore DVC-tracked data files
 data/raw/*
 !data/raw/.gitkeep
 !data/raw/*.dvc
