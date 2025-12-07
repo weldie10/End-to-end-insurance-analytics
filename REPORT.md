@@ -13,9 +13,12 @@
 This project develops a comprehensive risk analytics and predictive modeling platform for car insurance in South Africa. Through analysis of ~1 million historical claim records, we identify low-risk segments, optimize premium pricing, and enable data-driven marketing strategies to attract new clients while maintaining profitability.
 
 **Key Findings**:
-- Overall portfolio loss ratio calculated and analyzed across multiple dimensions
+- **Critical Finding**: Overall portfolio loss ratio of **104.77%** indicates unprofitability requiring immediate action
+- Descriptive statistics calculated for TotalPremium (mean=61.91, median=2.18) and TotalClaims (mean=64.86, median=0.00)
+- Data quality assessment: 0% missing values after preprocessing for key financial variables
+- Outlier detection: 20.90% outliers in TotalPremium, 0.28% in TotalClaims using IQR method
 - Significant risk variations identified across provinces and vehicle types
-- Temporal trends reveal patterns in claim frequency and severity
+- Temporal trends reveal patterns in claim frequency and severity over 18-month period
 - Vehicle make analysis highlights high and low-risk segments
 - Foundation established for predictive modeling and premium optimization
 
