@@ -1,12 +1,12 @@
 # Insurance Risk Analytics & Predictive Modeling
 
-Risk analytics and predictive modeling platform for AlphaCare Insurance Solutions. Analyzes historical car insurance claim data (Feb 2014 - Aug 2015) to identify low-risk segments and optimize premium pricing strategies.
+A comprehensive risk analytics and predictive modeling platform for AlphaCare Insurance Solutions. Analyzes historical car insurance claim data (Feb 2014 - Aug 2015) to identify low-risk segments, optimize premium pricing, and support data-driven business decisions.
 
 ## Features
 
-- **Data Loading & Preprocessing**: Automated data pipeline with quality assessment
+- **Data Pipeline**: Automated data loading, preprocessing, and quality assessment
 - **Exploratory Data Analysis**: Loss ratio analysis, outlier detection, temporal trends
-- **Statistical Testing**: A/B hypothesis testing for risk differences across dimensions
+- **Statistical Testing**: A/B hypothesis testing for risk differences across geographic and demographic dimensions
 - **Machine Learning**: Predictive models for claims and premium optimization
 - **Data Version Control**: DVC integration for reproducible data pipelines
 
@@ -33,9 +33,9 @@ processed = loader.preprocess_data()
 
 # Perform EDA
 eda = EDAAnalyzer(processed)
-loss_ratio = eda.calculate_loss_ratio(group_by=["Province", "VehicleType", "Gender"])
+loss_ratio = eda.calculate_loss_ratio(group_by=["Province", "VehicleType"])
 
-# Run A/B hypothesis tests for risk drivers
+# Run A/B hypothesis tests
 tester = ABRiskHypothesisTester(processed, alpha=0.05)
 results = tester.run_all_tests()
 ```
@@ -43,35 +43,38 @@ results = tester.run_all_tests()
 ## Project Structure
 
 ```
-src/alphacare/     # Core OOP classes
-data/              # DVC-tracked data (raw/processed)
-notebooks/         # Analysis notebooks
-Data/              # Source data files
+src/alphacare/          # Core OOP classes
+├── data/               # Data loading and preprocessing
+├── eda/                # Exploratory data analysis
+├── statistics/         # A/B hypothesis testing
+├── models/             # Machine learning models
+└── utils/              # Utility functions
+
+data/                   # DVC-tracked data (raw/processed)
+notebooks/              # Analysis notebooks
+scripts/                 # Analysis scripts
+reports/                 # Generated reports and visualizations
 ```
 
 ## Core Classes
 
 - **`DataLoader`**: Data loading and preprocessing
 - **`EDAAnalyzer`**: Exploratory data analysis and visualizations
-- **`ABRiskHypothesisTester`**: A/B statistical hypothesis testing for risk drivers (Claim Frequency & Severity)
+- **`ABRiskHypothesisTester`**: A/B statistical hypothesis testing for risk drivers
 - **`LinearRegressionModel`**: Zipcode-based claim prediction
 - **`ModelTrainer`**: Premium prediction models
 
-## Data Version Control
+## Key Findings
 
-Data files are tracked using DVC:
-
-```bash
-dvc init
-dvc remote add -d localstorage $(pwd)/data_storage
-dvc add data/raw/MachineLearningRating_v3.txt
-dvc push
-```
+- **Portfolio Loss Ratio**: 104.77% (indicating unprofitability)
+- **Risk Segmentation**: Significant variations identified across provinces and zipcodes
+- **Geographic Pricing**: Province and zipcode-based premium adjustments recommended
+- **Gender Analysis**: No significant risk differences detected (gender-neutral pricing supported)
 
 ## Technologies
 
 Python 3.8+, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, SciPy, DVC, Jupyter
 
----
+## License
 
-**License**: Proprietary - AlphaCare Insurance Solutions
+Proprietary - AlphaCare Insurance Solutions
