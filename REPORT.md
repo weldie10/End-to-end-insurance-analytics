@@ -4,23 +4,21 @@
 **AlphaCare Insurance Solutions (ACIS)**  
 **Date**: December 2025  
 **Data Period**: February 2014 - August 2015  
-**Status**: Task 1 & 2 Completed | Task 3 In Progress
+**Status**: Task 1, 2 & 3 Completed | Task 4 In Progress
 
 ---
 
-## Executive Summary
+## Business Context
 
-This project develops a comprehensive risk analytics and predictive modeling platform for car insurance in South Africa. Through analysis of ~1 million historical claim records, we identify low-risk segments, optimize premium pricing, and enable data-driven marketing strategies to attract new clients while maintaining profitability.
+AlphaCare Insurance Solutions is committed to developing cutting-edge risk and predictive analytics for car insurance planning and marketing in South Africa. This project analyzes historical insurance claim data to optimize marketing strategy and discover "low-risk" targets for premium reduction, creating opportunities to attract new clients while maintaining profitability.
 
-**Key Findings**:
-- **Critical Finding**: Overall portfolio loss ratio of **104.77%** indicates unprofitability requiring immediate action
-- Descriptive statistics calculated for TotalPremium (mean=61.91, median=2.18) and TotalClaims (mean=64.86, median=0.00)
-- Data quality assessment: 0% missing values after preprocessing for key financial variables
-- Outlier detection: 20.90% outliers in TotalPremium, 0.28% in TotalClaims using IQR method
-- Significant risk variations identified across provinces and vehicle types
-- Temporal trends reveal patterns in claim frequency and severity over 18-month period
-- Vehicle make analysis highlights high and low-risk segments
-- Foundation established for predictive modeling and premium optimization
+**Business Challenge**: Current portfolio shows **104.77% loss ratio**, indicating unprofitability. Urgent need to identify low-risk segments for premium optimization and targeted marketing.
+
+**Business Impact**:
+- **Attract New Clients**: Reduced premiums for low-risk segments increase market competitiveness
+- **Risk Management**: Better understanding of risk factors enables informed pricing decisions
+- **Profitability**: Optimize margins while expanding customer base
+- **Data-Driven Decisions**: Replace intuition with statistical evidence
 
 ---
 
@@ -29,69 +27,23 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 **Primary Objective**: Analyze historical insurance claim data (February 2014 - August 2015) to identify low-risk customer segments and develop predictive models that enable AlphaCare Insurance Solutions to optimize premium pricing, reduce risk exposure, and attract new clients through targeted marketing strategies.
 
 **Specific Objectives**:
-1. **Risk Segmentation**: Identify low-risk customer segments (by province, zipcode, vehicle type, gender) for premium reduction opportunities
-2. **Premium Optimization**: Develop machine learning models to predict optimal premium values based on car features, owner characteristics, and location
-3. **Marketing Strategy**: Enable data-driven marketing to low-risk segments with competitive premium pricing
-4. **Profitability Analysis**: Understand risk and margin differences across geographic and demographic dimensions through statistical hypothesis testing
-5. **Predictive Modeling**: Build models that predict total claims by zipcode and optimal premium values for new policies
+1. **Risk Segmentation**: Identify low-risk segments (by province, zipcode, vehicle type, gender) for premium reduction opportunities
+2. **Premium Optimization**: Develop machine learning models to predict optimal premium values
+3. **Marketing Strategy**: Enable data-driven marketing to low-risk segments with competitive pricing
+4. **Profitability Analysis**: Understand risk and margin differences through statistical hypothesis testing
+5. **Predictive Modeling**: Build models predicting total claims by zipcode and optimal premium values
 
 **Success Criteria**:
 - Identify at least 3 low-risk segments with loss ratio < 40%
 - Develop predictive models with R² > 0.7 for premium prediction
-- Complete hypothesis testing for all specified dimensions (provinces, zipcodes, gender)
+- Complete hypothesis testing for all specified dimensions
 - Generate comprehensive visualizations supporting business decisions
 
 ---
 
-## 1. Project Goals
+## Key Statistics & Data Quality
 
-### Primary Objectives
-
-1. **Risk Segmentation**: Identify low-risk customer segments for premium reduction opportunities
-2. **Premium Optimization**: Develop predictive models to determine optimal premium values
-3. **Marketing Strategy**: Enable targeted marketing to low-risk segments
-4. **Profitability Analysis**: Understand risk differences across geographic and demographic dimensions
-5. **Predictive Modeling**: Build machine learning models for claims prediction and premium optimization
-
-### Business Impact
-
-- **Attract New Clients**: Reduced premiums for low-risk segments increase market competitiveness
-- **Risk Management**: Better understanding of risk factors enables informed pricing decisions
-- **Profitability**: Optimize margins while expanding customer base
-- **Data-Driven Decisions**: Replace intuition with statistical evidence
-
----
-
-## 2. Methodology
-
-### 2.1 Data Overview
-
-**Data Source**: Historical insurance claim data  
-**Format**: Pipe-delimited text file (`MachineLearningRating_v3.txt`)  
-**Records**: 1,000,098 transactions  
-**Period**: February 2014 - August 2015 (18 months)  
-**Key Variables**:
-- Policy information (PolicyID, TransactionMonth)
-- Client demographics (Gender, MaritalStatus, Province, PostalCode)
-- Vehicle characteristics (Make, Model, VehicleType, RegistrationYear)
-- Financial metrics (TotalPremium, TotalClaims, SumInsured)
-- Coverage details (CoverType, CoverCategory)
-
-### 2.2 Data Quality Assessment
-
-**Missing Values Analysis**:
-- **TotalPremium**: 0 missing values (0.00%) - Complete after preprocessing
-- **TotalClaims**: 0 missing values (0.00%) - Complete after preprocessing
-- **SumInsured**: 0 missing values (0.00%) - Complete after preprocessing
-- **CustomValueEstimate**: 0 missing values (0.00%) - Complete after preprocessing
-
-**Data Quality Actions Taken**:
-- Missing numeric values filled with median for continuous variables
-- Missing categorical values filled with "Unknown"
-- Date columns converted to datetime format
-- Invalid values handled through preprocessing pipeline
-
-### 2.3 Descriptive Statistics
+### Descriptive Statistics
 
 **TotalPremium Statistics** (n=1,000,098):
 | Statistic | Value |
@@ -101,10 +53,7 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 | Standard Deviation | 230.28 |
 | Minimum | -782.58 |
 | Maximum | 65,282.60 |
-| 25th Percentile | 0.00 |
-| 75th Percentile | 21.93 |
 | Skewness | 138.60 (highly right-skewed) |
-| Kurtosis | 37,176.19 (heavy-tailed distribution) |
 
 **TotalClaims Statistics** (n=1,000,098):
 | Statistic | Value |
@@ -114,439 +63,351 @@ This project develops a comprehensive risk analytics and predictive modeling pla
 | Standard Deviation | 2,384.08 |
 | Minimum | -12,002.41 |
 | Maximum | 393,092.10 |
-| 25th Percentile | 0.00 |
-| 75th Percentile | 0.00 |
 | Skewness | 69.93 (highly right-skewed) |
-| Kurtosis | 6,791.93 (heavy-tailed distribution) |
 
-**Key Observations**:
-- Both variables are highly right-skewed with heavy tails
-- Median values much lower than means, indicating many zero/low values
-- Large standard deviations relative to means suggest high variability
-- Negative values present (likely data entry errors or adjustments)
+### Data Quality Assessment
 
-### 2.4 Outlier Detection & Treatment
+| Variable | Missing Values | Missing % | Status |
+|----------|---------------|-----------|--------|
+| TotalPremium | 0 | 0.00% | ✅ Complete |
+| TotalClaims | 0 | 0.00% | ✅ Complete |
+| SumInsured | 0 | 0.00% | ✅ Complete |
+| CustomValueEstimate | 0 | 0.00% | ✅ Complete |
 
-**Outlier Detection Method**: Interquartile Range (IQR) Method
-- Lower Bound = Q1 - 1.5 × IQR
-- Upper Bound = Q3 + 1.5 × IQR
-- Outliers identified as values outside these bounds
+### Outlier Detection (IQR Method)
 
-**Outlier Statistics**:
-- **TotalPremium**: 209,042 outliers (20.90% of records)
-- **TotalClaims**: 2,793 outliers (0.28% of records)
-- **CustomValueEstimate**: 217,880 outliers (21.79% of records)
+| Variable | Outliers | Percentage | Treatment |
+|----------|----------|------------|-----------|
+| TotalPremium | 209,042 | 20.90% | Retained for analysis, capped at 99th percentile for modeling |
+| TotalClaims | 2,793 | 0.28% | Retained for analysis |
+| CustomValueEstimate | 217,880 | 21.79% | Retained for analysis |
 
-**Outlier Treatment Strategy**:
-1. **For Analysis**: Outliers retained for comprehensive risk assessment
-2. **For Modeling**: Outliers will be capped at 99th percentile to prevent model skew
-3. **Documentation**: All outliers documented for business review
-4. **Investigation**: Negative values flagged for data quality review
-
-**Rationale**: Insurance data naturally contains extreme values (large claims, high-value vehicles). Retaining outliers provides complete risk picture while capping prevents model instability.
-
-### 2.5 Overall Loss Ratio
+### Overall Loss Ratio
 
 **Portfolio Loss Ratio**: **104.77%**
 
-**Calculation**: TotalClaims / TotalPremium = 64,860,000 / 61,905,000 = 1.0477
-
 **Interpretation**: 
-- Loss ratio > 100% indicates portfolio is unprofitable overall
+- Loss ratio > 100% indicates portfolio unprofitability
 - Premiums collected are less than claims paid
 - Urgent need for premium optimization and risk segmentation
-- Identifies critical business need for this analysis
-
-### 2.6 Analysis Framework
-
-#### Phase 1: Exploratory Data Analysis (EDA) ✅ Completed
-- ✅ Descriptive statistics calculated (TotalPremium, TotalClaims, SumInsured, CustomValueEstimate)
-- ✅ Data quality assessment completed (missing values: 0% after preprocessing)
-- ✅ Outlier detection completed (IQR method, 20.90% for TotalPremium, 0.28% for TotalClaims)
-- ✅ Loss ratio analysis by key dimensions (Province, VehicleType, Gender)
-- ✅ Temporal trend analysis (18-month period)
-- ✅ Vehicle make/model risk profiling
-
-#### Phase 2: Statistical Hypothesis Testing (In Progress)
-- Test risk differences across provinces
-- Test risk differences between zipcodes
-- Test margin (profit) differences between zipcodes
-- Test risk differences between genders
-
-#### Phase 3: Predictive Modeling (Planned)
-- Linear regression models by zipcode for claims prediction
-- Machine learning models for premium optimization
-- Feature importance analysis
-- Model evaluation and validation
-
-### 2.3 Technical Implementation
-
-- **Architecture**: Object-Oriented Programming (OOP) with modular design
-- **Data Processing**: Pandas, NumPy
-- **Statistical Analysis**: SciPy, Statsmodels
-- **Machine Learning**: Scikit-learn
-- **Visualization**: Matplotlib, Seaborn
-- **Data Version Control**: DVC
-- **Development**: Python 3.8+, Jupyter Notebooks
 
 ---
 
-## 3. Generated Visualizations
-
-### 3.1 Portfolio Overview Dashboard
-**File**: `reports/visualizations/01_portfolio_overview.png`
-
-**Components**:
-- **Overall Loss Ratio KPI**: Shows portfolio-wide loss ratio of **104.77%** (critical unprofitability indicator)
-- **Premium vs Claims Over Time**: Dual-axis line chart showing monthly trends over 18 months
-- **Claim Frequency Distribution**: Histogram of claim amounts (log scale) showing highly right-skewed distribution
-- **Premium Distribution**: Box plot showing premium distribution (log scale) with median=2.18, mean=61.91
-
-**Insights**:
-- **Critical Finding**: Loss ratio > 100% indicates urgent need for premium optimization
-- Provides high-level view of portfolio health showing unprofitability
-- Identifies temporal patterns in premium and claims
-- Highlights distribution characteristics: highly right-skewed with heavy tails
-- Median values much lower than means indicate many low/zero value transactions
-
----
-
-### 3.2 Loss Ratio by Province
-**File**: `reports/visualizations/03_loss_ratio_province.png`
-
-**Visualization**: Horizontal bar chart with color coding:
-- **Red**: High risk (Loss Ratio > 60%)
-- **Orange**: Medium risk (Loss Ratio 40-60%)
-- **Green**: Low risk (Loss Ratio < 40%)
-
-**Insights**:
-- Identifies provinces with highest and lowest risk profiles
-- Enables targeted marketing to low-risk provinces
-- Supports premium adjustment strategies by geography
-- Risk threshold lines (40% and 60%) provide clear segmentation
-
-**Business Action**: Consider premium reductions in green provinces, premium increases in red provinces
-
----
-
-### 3.3 Loss Ratio by Vehicle Type
-**File**: `reports/visualizations/04_loss_ratio_vehicle_type.png`
-
-**Components**:
-- **Top 10 Vehicle Types by Loss Ratio**: Horizontal bar chart showing highest risk vehicle types
-- **Premium vs Claims Scatter**: Relationship between average premium and claims by vehicle type
-
-**Insights**:
-- Identifies vehicle types with highest risk profiles
-- Reveals pricing efficiency (premium vs actual claims)
-- Supports vehicle-specific premium adjustments
-- Highlights opportunities for product segmentation
-
-**Business Action**: Adjust premiums for high-risk vehicle types, develop specialized products for low-risk segments
-
----
-
-### 3.4 Temporal Trends Analysis
-**File**: `reports/visualizations/07_temporal_trends.png`
-
-**Components**:
-- **Monthly Premium and Claims Trends**: Dual-axis line chart showing 18-month patterns
-- **Monthly Loss Ratio Trend**: Line chart with risk threshold markers and filled area
-
-**Insights**:
-- Reveals seasonal patterns in claims and premiums
-- Identifies periods of increased risk
-- Shows portfolio performance trends over time
-- Risk threshold visualization (40% and 60%) highlights critical periods
-
-**Business Action**: Implement seasonal pricing adjustments, enhance risk management during high-risk periods
-
----
-
-### 3.5 Vehicle Make Analysis
-**File**: `reports/visualizations/09_vehicle_make_analysis.png`
-
-**Components**:
-- **Top 10 Vehicle Makes by Total Claims**: Bar chart showing makes with highest claim volumes
-- **Top 10 Vehicle Makes by Loss Ratio**: Bar chart showing makes with highest risk (worst performers)
-
-**Insights**:
-- Identifies vehicle makes with highest claim volumes
-- Highlights makes with worst loss ratios (highest risk)
-- Enables make-specific risk assessment
-- Supports targeted marketing and pricing strategies
-
-**Business Action**: 
-- Develop partnerships with low-risk vehicle manufacturers
-- Adjust premiums based on vehicle make risk profiles
-- Create make-specific insurance products
-
----
-
-## 4. Key Findings
-
-### 4.1 Portfolio-Level Insights
-
-1. **Overall Loss Ratio**: Calculated and monitored as primary KPI
-2. **Temporal Patterns**: Identified seasonal and monthly trends in claims and premiums
-3. **Distribution Characteristics**: Understood claim frequency and premium distributions
-
-### 4.2 Geographic Insights
-
-1. **Province Risk Variation**: Significant differences in loss ratios across provinces
-2. **Low-Risk Provinces**: Identified opportunities for premium reduction and market expansion
-3. **High-Risk Provinces**: Require premium adjustments and enhanced risk management
-
-### 4.3 Vehicle Insights
-
-1. **Vehicle Type Risk**: Clear differentiation in risk profiles across vehicle types
-2. **Make-Specific Risk**: Significant variation in risk by vehicle manufacturer
-3. **Pricing Efficiency**: Opportunities to optimize premium-to-risk ratios
-
-### 4.4 Temporal Insights
-
-1. **Seasonal Patterns**: Identified periods of increased risk
-2. **Trend Analysis**: Portfolio performance trends over 18-month period
-3. **Risk Threshold Monitoring**: Visual tracking of portfolio health against benchmarks
-
----
-
-## 5. Implementation Status
+## Implementation Status Tables
 
 ### Task 1: Git and GitHub Setup ✅ COMPLETED
-- [x] Git repository initialized with proper version control
-- [x] Comprehensive README with project overview
-- [x] Modular OOP code structure implemented
-- [x] GitHub Actions CI/CD workflow configured
-- [x] Task-specific branches created (main, task-1, task-2)
-- [x] Pull request workflow established
-
-#### Task 1 Priority Tables
-
-**Table 1: Git Repository Setup Priorities**
 
 | Priority | Component | Description | Status |
 |----------|-----------|-------------|--------|
 | **P0 (Critical)** | Repository Initialization | Initialize git repository with proper structure | ✅ Completed |
 | **P0 (Critical)** | .gitignore Configuration | Exclude venv, cache, data files, and sensitive information | ✅ Completed |
 | **P1 (High)** | Branch Strategy | Create main, task-1, task-2 branches | ✅ Completed |
-| **P1 (High)** | Initial Commit | Commit project structure and core files | ✅ Completed |
-| **P2 (Medium)** | Commit History | Establish meaningful commit message conventions | ✅ Completed |
-| **P2 (Medium)** | Remote Repository | Connect to GitHub remote repository | ✅ Completed |
-
-**Table 2: Documentation & Code Quality Priorities**
-
-| Priority | Component | Description | Status |
-|----------|-----------|-------------|--------|
-| **P0 (Critical)** | README.md | Comprehensive project documentation with setup instructions | ✅ Completed |
-| **P0 (Critical)** | Project Structure | Modular OOP architecture with clear directory structure | ✅ Completed |
-| **P1 (High)** | Code Organization | Separate modules for data, EDA, statistics, models, utils | ✅ Completed |
-| **P1 (High)** | Requirements.txt | Complete dependency list with versions | ✅ Completed |
-| **P2 (Medium)** | Setup.py | Package installation configuration | ✅ Completed |
-| **P2 (Medium)** | Example Usage | Demonstration script showing OOP usage | ✅ Completed |
-
-**Table 3: CI/CD & Workflow Priorities**
-
-| Priority | Component | Description | Status |
-|----------|-----------|-------------|--------|
-| **P0 (Critical)** | GitHub Actions Workflow | Automated linting and testing pipeline | ✅ Completed |
-| **P1 (High)** | Pull Request Template | Standardized PR template for code review | ✅ Completed |
-| **P1 (High)** | Branch Protection | Establish branch workflow (main, task branches) | ✅ Completed |
-| **P2 (Medium)** | Code Linting | Flake8 and Black formatting checks | ✅ Configured |
-| **P2 (Medium)** | Automated Testing | Pytest integration for unit tests | ✅ Configured |
-| **P3 (Low)** | Code Coverage | Coverage reporting in CI pipeline | ⏳ Planned |
+| **P1 (High)** | README.md | Comprehensive project documentation | ✅ Completed |
+| **P1 (High)** | Project Structure | Modular OOP architecture | ✅ Completed |
+| **P2 (Medium)** | CI/CD Workflow | Automated linting and testing pipeline | ✅ Completed |
+| **P2 (Medium)** | PR Template | Standardized pull request template | ✅ Completed |
 
 ### Task 2: Data Version Control (DVC) ✅ COMPLETED
-- [x] DVC initialized in repository
-- [x] Local remote storage configured
-- [x] Data file tracked with DVC (`MachineLearningRating_v3.txt`)
-- [x] DVC artifacts committed with proper .gitignore rules
-- [x] Data versioning workflow established
 
-### Task 3: Exploratory Data Analysis & Statistics 🔄 NEXT
-- [ ] Complete comprehensive EDA on all key dimensions
-- [ ] Statistical hypothesis testing:
-  - [ ] Risk differences across provinces
-  - [ ] Risk differences between zipcodes
-  - [ ] Margin (profit) differences between zipcodes
-  - [ ] Risk differences between genders
-- [ ] Generate remaining visualizations (12 additional)
-- [ ] Document statistical findings and interpretations
+| Component | Description | Status |
+|-----------|-------------|--------|
+| DVC Initialization | DVC repository initialized | ✅ Completed |
+| Remote Storage | Local storage configured (`data_storage/`) | ✅ Completed |
+| Data Tracking | Data file tracked with DVC (`MachineLearningRating_v3.txt`) | ✅ Completed |
+| Git Integration | DVC artifacts committed with proper .gitignore | ✅ Completed |
+
+### Task 3: EDA & Statistics ✅ COMPLETED
+
+| Task | Status |
+|------|--------|
+| Comprehensive EDA on all dimensions | ✅ Completed |
+| Loss ratio calculations by dimensions | ✅ Completed |
+| Temporal trend analysis | ✅ Completed |
+| Vehicle make/model analysis | ✅ Completed |
+| 5 key visualizations generated | ✅ Completed |
+| Statistical hypothesis testing | ✅ Completed |
+| Hypothesis test visualizations | ✅ Completed |
+| Business recommendations | ✅ Completed |
 
 ### Task 4: Machine Learning & Predictive Modeling 📋 PLANNED
-- [ ] Linear regression models by zipcode for total claims prediction
-- [ ] Premium prediction machine learning model:
-  - [ ] Feature engineering (car, owner, location, plan features)
-  - [ ] Model training (Random Forest, Gradient Boosting)
-  - [ ] Feature importance analysis
-  - [ ] Model evaluation and validation
-- [ ] Model performance visualizations
-- [ ] Model interpretation and explainability
+
+| Task | Status |
+|------|--------|
+| Linear regression models by zipcode | ⏳ Pending |
+| Premium prediction ML models | ⏳ Pending |
+| Feature importance analysis | ⏳ Pending |
+| Model evaluation and validation | ⏳ Pending |
 
 ---
 
-## 6. Visualization Path (Remaining)
+## Generated Visualizations
 
-### Priority Visualizations
+### 1. Portfolio Overview Dashboard
+**File**: `reports/visualizations/01_portfolio_overview.png`
 
-1. **Loss Ratio by Gender** - Gender-based risk analysis
-2. **Multi-Dimensional Loss Ratio** - Combined Province × VehicleType analysis
-3. **Zipcode Risk Analysis** - Geographic risk clustering
-4. **Margin Analysis** - Profitability by location
-5. **Hypothesis Test Results** - Statistical test visualizations
-6. **Model Performance** - Predictive model evaluation charts
-7. **Feature Importance** - ML model driver analysis
+**Components**: Overall Loss Ratio KPI (104.77%), Monthly Premium vs Claims trends, Claim frequency distribution, Premium distribution box plot
 
-### Implementation
-
-All visualizations can be generated using the `scripts/generate_visualizations.py` script, which leverages the OOP classes:
-- `DataLoader`: Data loading and preprocessing
-- `EDAAnalyzer`: EDA and visualization generation
-- `HypothesisTester`: Statistical testing (for future visualizations)
+**Key Insight**: Portfolio shows unprofitability with loss ratio > 100%. Highly right-skewed distributions indicate need for robust statistical methods.
 
 ---
 
-## 7. Technical Architecture
+### 2. Loss Ratio by Province
+**File**: `reports/visualizations/03_loss_ratio_province.png`
 
-### Object-Oriented Design
+**Visualization**: Horizontal bar chart with color-coded risk levels (Red: >60%, Orange: 40-60%, Green: <40%)
 
-```
-src/alphacare/
-├── data/              # DataLoader: Data loading and preprocessing
-├── eda/               # EDAAnalyzer: Exploratory data analysis
-├── statistics/        # HypothesisTester: Statistical testing
-├── models/            # ModelTrainer, LinearRegressionModel: ML models
-└── utils/             # Logging, DVC management utilities
-```
+**Key Insight**: Significant risk variation across provinces. Low-risk provinces (<40%) identified for premium reduction and market expansion.
 
-### Key Features
-
-- **Modular Design**: Each component is a separate, reusable class
-- **Data Version Control**: DVC integration for reproducible pipelines
-- **Comprehensive Logging**: Full logging throughout the pipeline
-- **Error Handling**: Robust error handling and validation
-- **Extensible**: Easy to add new analysis methods and visualizations
+**Business Action**: Consider premium reductions in green provinces, premium increases in red provinces.
 
 ---
 
-## 8. Next Steps
+### 3. Loss Ratio by Vehicle Type
+**File**: `reports/visualizations/04_loss_ratio_vehicle_type.png`
 
-### Task 3: EDA & Statistical Analysis (Current Focus)
-1. **Complete Hypothesis Testing**:
-   - Test risk differences across provinces (ANOVA/Kruskal-Wallis)
-   - Test risk differences between zipcodes
-   - Test margin differences between zipcodes
-   - Test risk differences between genders (Mann-Whitney U)
-   - Document all test results with p-values and interpretations
+**Components**: Top 10 vehicle types by loss ratio, Premium vs Claims scatter plot
 
-2. **Generate Additional Visualizations**:
-   - Loss ratio by gender
-   - Multi-dimensional loss ratio (Province × VehicleType)
-   - Zipcode risk analysis
-   - Margin analysis by location
-   - Hypothesis test results visualization
+**Key Insight**: Clear differentiation in risk profiles across vehicle types. Pricing efficiency opportunities identified.
 
-3. **Statistical Reporting**:
-   - Summarize all hypothesis test results
-   - Provide actionable insights from statistical analysis
-   - Update report with findings
-
-### Task 4: Machine Learning & Predictive Modeling (Next Phase)
-1. **Linear Regression by Zipcode**:
-   - Fit regression models for each zipcode
-   - Evaluate model performance (R², RMSE, MAE)
-   - Identify best and worst performing zipcode models
-
-2. **Premium Prediction Model**:
-   - Feature engineering from all available dimensions
-   - Train Random Forest and Gradient Boosting models
-   - Evaluate and compare model performance
-   - Analyze feature importance
-
-3. **Model Deployment**:
-   - Create model performance visualizations
-   - Document model interpretability
-   - Prepare model for production use
-
-### Future Tasks
-- Build interactive executive dashboard
-- Generate comprehensive recommendations
-- Present findings to stakeholders
-- Implement pricing strategy adjustments
+**Business Action**: Adjust premiums for high-risk vehicle types, develop specialized products for low-risk segments.
 
 ---
 
-## 9. Expected Deliverables
+### 4. Temporal Trends Analysis
+**File**: `reports/visualizations/07_temporal_trends.png`
 
-1. ✅ **Data Pipeline**: Automated data loading and preprocessing
-2. ✅ **EDA Framework**: Comprehensive exploratory analysis classes
-3. ✅ **Initial Visualizations**: 5 key visualizations generated
-4. ⏳ **Statistical Analysis**: Hypothesis test results (in progress)
-5. ⏳ **Predictive Models**: Trained models for claims and premium prediction
-6. ⏳ **Complete Visualization Suite**: 17+ visualizations
-7. ⏳ **Executive Dashboard**: Interactive dashboard for stakeholders
-8. ⏳ **Final Report**: Complete analysis with recommendations
+**Components**: Monthly Premium and Claims trends (dual-axis), Monthly Loss Ratio trend with risk thresholds
+
+**Key Insight**: Seasonal patterns identified in claims and premiums over 18-month period. Risk threshold visualization highlights critical periods.
+
+**Business Action**: Implement seasonal pricing adjustments, enhance risk management during high-risk periods.
 
 ---
 
-## 10. Key Metrics & KPIs
+### 5. Vehicle Make Analysis
+**File**: `reports/visualizations/09_vehicle_make_analysis.png`
 
-### Business Metrics
-- **Overall Loss Ratio**: Calculated and monitored
-- **Low-Risk Segment Size**: Identified through province and vehicle analysis
-- **Risk Variation**: Quantified across geographic and vehicle dimensions
-- **Temporal Trends**: Tracked over 18-month period
+**Components**: Top 10 makes by total claims, Top 10 makes by loss ratio (highest risk)
 
-### Technical Metrics
-- **Data Quality**: 1M+ records processed successfully
-- **Visualization Coverage**: 5 of 17 planned visualizations completed
-- **Code Quality**: OOP architecture with modular design
-- **Reproducibility**: DVC integration for data version control
+**Key Insight**: Significant variation in risk by vehicle manufacturer. Top risk makes identified for premium adjustment.
+
+**Business Action**: Develop partnerships with low-risk manufacturers, adjust premiums based on make risk profiles.
 
 ---
 
-## 11. Risk Factors & Considerations
+## Task 3: Statistical Hypothesis Testing Results
 
-1. **Data Quality**: Missing values handled, outliers identified
-2. **Temporal Changes**: Market conditions may have changed since 2015 data period
-3. **Model Generalization**: Models will need validation on current data
-4. **Regulatory Compliance**: Ensure pricing strategies comply with South African regulations
-5. **Ethical Considerations**: Avoid discriminatory pricing practices
+### Methodology
 
----
+**Metrics Used**:
+- **Claim Frequency**: Proportion of policies with at least one claim (binary: 1 if TotalClaims > 0, 0 otherwise)
+- **Claim Severity**: Average claim amount given a claim occurred (mean of TotalClaims where TotalClaims > 0)
+- **Margin**: TotalPremium - TotalClaims
 
-## 12. Conclusion
+**Statistical Tests**:
+- **Claim Frequency**: Chi-square test for categorical data (proportion with claims vs. no claims)
+- **Claim Severity**: Kruskal-Wallis test (non-parametric) for multiple groups, Mann-Whitney U for two groups
+- **Margin**: Kruskal-Wallis test for multiple groups
 
-This project establishes a solid foundation for data-driven insurance risk analytics. Through comprehensive EDA and initial visualizations, we have:
-
-- **Identified Key Risk Segments**: Provinces and vehicle types with varying risk profiles
-- **Established Analysis Framework**: OOP architecture enabling scalable analysis
-- **Generated Actionable Insights**: Visualizations supporting business decision-making
-- **Created Reproducible Pipeline**: DVC integration ensures data version control
-
-The visualization path provides clear communication of insights to both technical and business stakeholders. As we progress with hypothesis testing and predictive modeling, we will build upon these foundations to deliver comprehensive recommendations for premium optimization and marketing strategy.
+**Significance Level**: α = 0.05
 
 ---
 
-## Appendix: Generated Visualizations
+### Hypothesis Test 1: Risk Differences Across Provinces
 
-All visualizations are saved in `reports/visualizations/`:
+**Null Hypothesis (H₀)**: There are no risk differences across provinces
 
-1. `01_portfolio_overview.png` - **Portfolio Overview Dashboard**: Overall loss ratio KPI, monthly premium/claims trends, claim frequency distribution, and premium distribution box plot providing high-level portfolio health metrics.
+**Results**:
+- **Claim Frequency Test**: Chi-square, p < 0.0001 ***
+- **Claim Severity Test**: Kruskal-Wallis, p < 0.0001 ***
+- **Conclusion**: **REJECT H₀** - Risk differences exist across provinces
 
-2. `03_loss_ratio_province.png` - **Loss Ratio by Province**: Horizontal bar chart with color-coded risk levels (red: >60%, orange: 40-60%, green: <40%) identifying high and low-risk provinces for targeted marketing and premium adjustments.
+**Key Findings**:
 
-3. `04_loss_ratio_vehicle_type.png` - **Loss Ratio by Vehicle Type**: Top 10 vehicle types by loss ratio with premium vs claims scatter plot, enabling vehicle-specific risk assessment and pricing optimization.
+| Province | Claim Frequency | Claim Severity | Policies | Claims |
+|----------|----------------|----------------|----------|--------|
+| Gauteng | 0.34% | R 22,243.88 | 393,865 | 1,322 |
+| KwaZulu-Natal | 0.28% | R 29,609.49 | 169,781 | 483 |
+| Western Cape | 0.22% | R 28,095.85 | 170,796 | 370 |
+| Northern Cape | 0.13% | R 11,186.31 | 6,380 | 8 |
 
-4. `07_temporal_trends.png` - **Temporal Trends Analysis**: Dual-axis monthly trends showing premium and claims over 18 months, plus loss ratio trend with risk threshold markers (40% and 60%) highlighting seasonal patterns and portfolio performance.
+**Business Interpretation**:
+- **Gauteng** exhibits the highest claim frequency (0.34%), 2.6x higher than Northern Cape (0.13%)
+- **KwaZulu-Natal** shows the highest claim severity (R 29,609.49 average per claim)
+- **Northern Cape** has the lowest risk profile (0.13% frequency, R 11,186.31 severity)
 
-5. `09_vehicle_make_analysis.png` - **Vehicle Make Analysis**: Top 10 makes by total claims volume and top 10 by loss ratio (highest risk), supporting make-specific risk profiling and partnership opportunities.
+**Business Recommendation**: 
+> We reject the null hypothesis for provinces (p < 0.0001). Specifically, Gauteng exhibits a 2.6x higher claim frequency than Northern Cape, suggesting regional risk adjustment to our premiums may be warranted. Consider implementing province-based pricing tiers with premium increases for high-risk provinces (Gauteng, KwaZulu-Natal) and premium reductions for low-risk provinces (Northern Cape, Free State).
 
-**Generation Script**: `scripts/generate_visualizations.py`
 ---
 
-**Project Status**: Task 1 & 2 Completed | Task 3 In Progress  
+### Hypothesis Test 2: Risk Differences Between Zipcodes
+
+**Null Hypothesis (H₀)**: There are no risk differences between zipcodes
+
+**Results**:
+- **Claim Frequency Test**: Chi-square, p < 0.0001 ***
+- **Claim Severity Test**: Kruskal-Wallis, p < 0.0001 ***
+- **Conclusion**: **REJECT H₀** - Risk differences exist between zipcodes
+- **Zipcodes Tested**: Top 20 zipcodes by policy count
+
+**Key Findings**:
+
+**Top 5 Highest Risk Zipcodes** (by claim frequency):
+| Zipcode | Claim Frequency | Claim Severity | Policies |
+|---------|----------------|----------------|----------|
+| 1863 | 0.51% | R 30,915.85 | 8,655 |
+| 400 | 0.51% | R 7,133.12 | 6,692 |
+| 8000 | 0.43% | R 33,685.33 | 11,794 |
+
+**Top 5 Lowest Risk Zipcodes** (by claim frequency):
+| Zipcode | Claim Frequency | Claim Severity | Policies |
+|---------|----------------|----------------|----------|
+| 7405 | 0.16% | R 21,002.02 | 18,518 |
+| 7784 | 0.17% | R 35,156.65 | 28,585 |
+| 7750 | 0.18% | R 21,929.24 | 9,408 |
+
+**Business Interpretation**:
+- Zipcode **1863** has 3.2x higher claim frequency (0.51%) than zipcode **7405** (0.16%)
+- Significant variation in both frequency and severity across zipcodes
+
+**Business Recommendation**:
+> We reject the null hypothesis for zipcodes (p < 0.0001). Risk differences exist between zipcodes, with the highest-risk zipcode (1863) showing 3.2x higher claim frequency than the lowest-risk zipcode (7405). Recommendation: Implement zipcode-based pricing tiers to reflect risk differences and optimize premium pricing.
+
+---
+
+### Hypothesis Test 3: Margin Differences Between Zipcodes
+
+**Null Hypothesis (H₀)**: There is no significant margin (profit) difference between zip codes
+
+**Results**:
+- **Test Method**: Kruskal-Wallis
+- **P-value**: p < 0.0001 ***
+- **Conclusion**: **REJECT H₀** - Margin differences exist between zipcodes
+
+**Key Findings**:
+
+**Top 5 Most Profitable Zipcodes**:
+| Zipcode | Mean Margin | Std Dev | Policies |
+|---------|-------------|---------|----------|
+| 400 | R 38.81 | R 1,182.56 | 6,692 |
+| 152 | R 27.91 | R 1,551.27 | 9,423 |
+| 299 | R 19.56 | R 1,289.07 | 25,546 |
+
+**Top 5 Least Profitable Zipcodes**:
+| Zipcode | Mean Margin | Std Dev | Policies |
+|---------|-------------|---------|----------|
+| 1863 | -R 100.57 | R 3,974.94 | 8,655 |
+| 4001 | -R 57.58 | R 3,528.40 | 6,647 |
+| 302 | -R 56.35 | R 3,843.54 | 9,531 |
+
+**Business Interpretation**:
+- Zipcode **400** shows positive margin of R 38.81 per policy
+- Zipcode **1863** shows negative margin of -R 100.57 per policy (loss-making)
+- Margin difference of R 139.38 between most and least profitable zipcodes
+
+**Business Recommendation**:
+> We reject the null hypothesis for zipcode margins (p < 0.0001). Significant margin differences exist between zipcodes, with zipcode 400 showing R 38.81 profit per policy while zipcode 1863 shows -R 100.57 loss per policy. Recommendation: Adjust pricing strategy to optimize margins by zipcode, with premium increases for unprofitable zipcodes and competitive pricing for profitable segments.
+
+---
+
+### Hypothesis Test 4: Risk Differences Between Women and Men
+
+**Null Hypothesis (H₀)**: There is no significant risk difference between Women and Men
+
+**Results**:
+- **Claim Frequency Test**: Chi-square, p = 0.9515
+- **Claim Severity Test**: Mann-Whitney U, p = 0.2235
+- **Conclusion**: **FAIL TO REJECT H₀** - No significant risk differences between genders
+
+**Key Findings**:
+
+| Gender | Claim Frequency | Claim Severity | Sample Size |
+|--------|----------------|----------------|-------------|
+| Female | 0.21% | R 17,874.72 | 6,755 |
+| Male | 0.22% | R 14,858.55 | 42,817 |
+
+**Business Interpretation**:
+- Claim frequency difference: 0.01% (statistically insignificant)
+- Claim severity difference: R 3,016.17 (statistically insignificant)
+- Both p-values > 0.05, indicating no significant difference
+
+**Business Recommendation**:
+> We fail to reject the null hypothesis for gender (p = 0.9515 for frequency, p = 0.2235 for severity). No significant risk differences between genders detected. Recommendation: Gender-neutral pricing may be appropriate, which also aligns with regulatory requirements in many jurisdictions.
+
+---
+
+### Hypothesis Testing Summary
+
+| Test | Null Hypothesis | Test Method | P-Value | Reject H₀? | Conclusion |
+|------|----------------|-------------|---------|------------|------------|
+| Province Risk | No risk differences across provinces | Chi-square (Freq) & Kruskal-Wallis (Sev) | < 0.0001 | ✅ Yes | Risk differences exist |
+| Zipcode Risk | No risk differences between zipcodes | Chi-square (Freq) & Kruskal-Wallis (Sev) | < 0.0001 | ✅ Yes | Risk differences exist |
+| Zipcode Margin | No margin differences between zipcodes | Kruskal-Wallis | < 0.0001 | ✅ Yes | Margin differences exist |
+| Gender Risk | No risk differences between genders | Chi-square (Freq) & Mann-Whitney U (Sev) | 0.9515 / 0.2235 | ❌ No | No significant differences |
+
+**Key Insights**:
+1. **Geographic Risk Segmentation**: Both provinces and zipcodes show significant risk variations, supporting location-based pricing strategies
+2. **Profitability by Location**: Zipcode-level margin analysis reveals opportunities for premium optimization
+3. **Gender Neutrality**: No statistical evidence for gender-based risk differences, supporting gender-neutral pricing
+
+**Strategic Recommendations**:
+1. **Implement Geographic Pricing Tiers**: Create province and zipcode-based premium adjustments
+2. **Optimize Unprofitable Segments**: Increase premiums for high-risk, low-margin zipcodes (e.g., 1863, 4001)
+3. **Expand Low-Risk Markets**: Target low-risk provinces and zipcodes with competitive pricing to attract new customers
+4. **Maintain Gender-Neutral Pricing**: Continue gender-neutral approach as no statistical difference detected
+
+---
+
+## Summary
+
+### Key Findings
+
+1. **Critical Portfolio Issue**: Overall loss ratio of 104.77% indicates urgent need for premium optimization
+2. **Risk Segmentation**: Significant variations identified across provinces and vehicle types
+3. **Data Quality**: 0% missing values after preprocessing, outliers documented (20.90% in TotalPremium)
+4. **Distribution Characteristics**: Highly right-skewed distributions require robust statistical methods
+5. **Temporal Patterns**: Seasonal trends identified requiring dynamic pricing strategies
+
+### Completed Work
+
+- ✅ **Task 1**: Git repository, OOP architecture, CI/CD pipeline established
+- ✅ **Task 2**: DVC initialized, data versioning workflow established
+- ✅ **Task 3**: EDA completed, hypothesis testing completed, 8 visualizations generated
+- ✅ **Data Quality**: Comprehensive assessment completed with 0% missing values
+- ✅ **Outlier Analysis**: IQR method applied, treatment strategy documented
+- ✅ **Hypothesis Testing**: All 4 hypothesis tests completed with statistical validation
+- ✅ **Business Recommendations**: Actionable insights provided for each test result
+
+### Current Status
+
+- **Data Records Analyzed**: 1,000,098 transactions
+- **Visualizations Generated**: 8 visualizations (hypothesis testing + EDA)
+- **Overall Loss Ratio**: 104.77% (critical finding)
+- **Low-Risk Segments**: Identified through province, zipcode, and vehicle analysis
+- **Hypothesis Tests Completed**: 4/4 tests with statistical validation
+- **Key Finding**: Geographic risk segmentation validated; gender-neutral pricing supported
+
+---
+
+## Next Focus
+
+### Immediate Priority: Task 4 - Machine Learning & Predictive Modeling
+
+1. **Linear Regression by Zipcode**: Fit models for each zipcode to predict claims
+2. **Premium Prediction Model**: Feature engineering and ML model training
+3. **Model Evaluation**: Analyze feature importance, validate model performance
+4. **Model Deployment**: Create performance visualizations, document interpretability
+
+### Next Phase: Task 4 - Machine Learning & Predictive Modeling
+
+1. **Linear Regression by Zipcode**: Fit models for each zipcode, evaluate performance
+2. **Premium Prediction Model**: Feature engineering, train Random Forest/Gradient Boosting models
+3. **Model Evaluation**: Analyze feature importance, validate model performance
+4. **Model Deployment**: Create performance visualizations, document interpretability
+
+---
+
+**Project Status**: Task 1, 2 & 3 Completed | Task 4 In Progress  
 **Last Updated**: December 2025  
-**Team**: AlphaCare Insurance Solutions Data Analytics Team  
-**Data Records Analyzed**: 1,000,098
-
+**Team**: AlphaCare Insurance Solutions Data Analytics Team

@@ -1,0 +1,340 @@
+{
+  "province_risk_test": {
+    "test_name": "Chi-square (Frequency) & Kruskal-Wallis (Severity)",
+    "null_hypothesis": "There are no risk differences across provinces",
+    "frequency_test": "Chi-square",
+    "frequency_statistic": 104.19088107029361,
+    "frequency_p_value": 5.925510718204677e-19,
+    "severity_test": "Kruskal-Wallis",
+    "severity_statistic": 106.09273218457841,
+    "severity_p_value": 2.4146571363396784e-19,
+    "alpha": 0.05,
+    "reject_null": "True",
+    "conclusion": "Reject H0: Risk differences exist across provinces",
+    "province_metrics": {
+      "Gauteng": {
+        "frequency": 0.0033564800121869166,
+        "severity": 22243.878395705604,
+        "count": 393865,
+        "claims_count": 1322.0
+      },
+      "KwaZulu-Natal": {
+        "frequency": 0.002844841295551328,
+        "severity": 29609.487472667177,
+        "count": 169781,
+        "claims_count": 483.0
+      },
+      "Mpumalanga": {
+        "frequency": 0.0024280132023217875,
+        "severity": 15979.55342105263,
+        "count": 52718,
+        "claims_count": 128.0
+      },
+      "Eastern Cape": {
+        "frequency": 0.0016482067510548524,
+        "severity": 27128.533277192982,
+        "count": 30336,
+        "claims_count": 50.0
+      },
+      "Western Cape": {
+        "frequency": 0.002166327080259491,
+        "severity": 28095.849880512094,
+        "count": 170796,
+        "claims_count": 370.0
+      },
+      "Limpopo": {
+        "frequency": 0.002697696891608955,
+        "severity": 15171.29418695993,
+        "count": 24836,
+        "claims_count": 67.0
+      },
+      "North West": {
+        "frequency": 0.002435671065763119,
+        "severity": 16963.467034635298,
+        "count": 143287,
+        "claims_count": 349.0
+      },
+      "Free State": {
+        "frequency": 0.0013581923694283246,
+        "severity": 32265.661084529474,
+        "count": 8099,
+        "claims_count": 11.0
+      },
+      "Northern Cape": {
+        "frequency": 0.0012539184952978057,
+        "severity": 11186.313596491224,
+        "count": 6380,
+        "claims_count": 8.0
+      }
+    }
+  },
+  "zipcode_risk_test": {
+    "test_name": "Chi-square (Frequency) & Kruskal-Wallis (Severity)",
+    "null_hypothesis": "There are no risk differences between zipcodes",
+    "frequency_test": "Chi-square",
+    "frequency_statistic": 107.20483669690398,
+    "frequency_p_value": 2.6030421728100892e-14,
+    "severity_test": "Kruskal-Wallis",
+    "severity_statistic": 115.23577697263512,
+    "severity_p_value": 8.567443149753408e-16,
+    "alpha": 0.05,
+    "reject_null": "True",
+    "conclusion": "Reject H0: Risk differences exist between zipcodes",
+    "zipcode_metrics": {
+      "2000": {
+        "frequency": 0.003640503977587679,
+        "severity": 19196.413726806724,
+        "count": 133498,
+        "claims_count": 486.0
+      },
+      "122": {
+        "frequency": 0.004270810030302414,
+        "severity": 18162.025865497075,
+        "count": 49171,
+        "claims_count": 210.0
+      },
+      "7784": {
+        "frequency": 0.0017491691446562883,
+        "severity": 35156.65370877194,
+        "count": 28585,
+        "claims_count": 50.0
+      },
+      "299": {
+        "frequency": 0.0026227197995772333,
+        "severity": 13622.745632364495,
+        "count": 25546,
+        "claims_count": 67.0
+      },
+      "152": {
+        "frequency": 0.0033959460893558313,
+        "severity": 10755.037527412278,
+        "count": 9423,
+        "claims_count": 32.0
+      },
+      "7100": {
+        "frequency": 0.002755634287963783,
+        "severity": 21165.158245614035,
+        "count": 10161,
+        "claims_count": 28.0
+      },
+      "1863": {
+        "frequency": 0.005083766608896592,
+        "severity": 30915.847687400328,
+        "count": 8655,
+        "claims_count": 44.0
+      },
+      "302": {
+        "frequency": 0.0022033364809568774,
+        "severity": 45055.04099415201,
+        "count": 9531,
+        "claims_count": 21.0
+      },
+      "458": {
+        "frequency": 0.0023230490018148822,
+        "severity": 20160.273245614037,
+        "count": 13775,
+        "claims_count": 32.0
+      },
+      "7750": {
+        "frequency": 0.0018069727891156463,
+        "severity": 21929.23934984517,
+        "count": 9408,
+        "claims_count": 17.0
+      },
+      "8000": {
+        "frequency": 0.004324232660674919,
+        "severity": 33685.32997592019,
+        "count": 11794,
+        "claims_count": 51.0
+      },
+      "1724": {
+        "frequency": 0.0024735331948154745,
+        "severity": 22034.356842105255,
+        "count": 10107,
+        "claims_count": 25.0
+      },
+      "4001": {
+        "frequency": 0.0030088761847449977,
+        "severity": 43175.31184210525,
+        "count": 6647,
+        "claims_count": 20.0
+      },
+      "4360": {
+        "frequency": 0.002774922918807811,
+        "severity": 37292.0220922677,
+        "count": 9730,
+        "claims_count": 27.0
+      },
+      "1022": {
+        "frequency": 0.0018876828692779614,
+        "severity": 24535.128366228044,
+        "count": 8476,
+        "claims_count": 16.0
+      },
+      "4068": {
+        "frequency": 0.0036434296818071412,
+        "severity": 22526.976210526303,
+        "count": 8234,
+        "claims_count": 30.0
+      },
+      "7405": {
+        "frequency": 0.0015660438492277784,
+        "severity": 21002.022686025408,
+        "count": 18518,
+        "claims_count": 29.0
+      },
+      "400": {
+        "frequency": 0.005080693365212194,
+        "severity": 7133.122549019608,
+        "count": 6692,
+        "claims_count": 34.0
+      },
+      "470": {
+        "frequency": 0.004302757676510855,
+        "severity": 12946.83323365231,
+        "count": 10226,
+        "claims_count": 44.0
+      },
+      "2196": {
+        "frequency": 0.002896451846488052,
+        "severity": 50877.77796052629,
+        "count": 11048,
+        "claims_count": 32.0
+      }
+    },
+    "zipcodes_tested": 20
+  },
+  "zipcode_margin_test": {
+    "test_name": "Kruskal-Wallis",
+    "null_hypothesis": "There is no significant margin (profit) difference between zip codes",
+    "statistic": 7260.124999766737,
+    "p_value": 0.0,
+    "alpha": 0.05,
+    "reject_null": "True",
+    "conclusion": "Reject H0: Margin differences exist between zipcodes",
+    "zipcode_margins": {
+      "122": {
+        "mean": -22.859806159734156,
+        "std": 2531.581028128015,
+        "count": 49171
+      },
+      "152": {
+        "mean": 27.911639886243183,
+        "std": 1551.2730752651275,
+        "count": 9423
+      },
+      "299": {
+        "mean": 19.55941497955782,
+        "std": 1289.0656171189,
+        "count": 25546
+      },
+      "302": {
+        "mean": -56.34649492036327,
+        "std": 3843.5444227579137,
+        "count": 9531
+      },
+      "400": {
+        "mean": 38.81259614123584,
+        "std": 1182.5562139085462,
+        "count": 6692
+      },
+      "458": {
+        "mean": 4.546073503345194,
+        "std": 1656.4901615076842,
+        "count": 13775
+      },
+      "470": {
+        "mean": 3.0691478522074913,
+        "std": 1656.9188610573055,
+        "count": 10226
+      },
+      "1022": {
+        "mean": 11.993273224182836,
+        "std": 2067.556694532163,
+        "count": 8476
+      },
+      "1724": {
+        "mean": -10.914764205773889,
+        "std": 1516.4300705577955,
+        "count": 10107
+      },
+      "1863": {
+        "mean": -100.57095343411655,
+        "std": 3974.938096626424,
+        "count": 8655
+      },
+      "2000": {
+        "mean": -8.111944272270655,
+        "std": 2008.3261688628434,
+        "count": 133498
+      },
+      "2196": {
+        "mean": -21.341082330424356,
+        "std": 4887.697966696967,
+        "count": 11048
+      },
+      "4001": {
+        "mean": -57.57625075854396,
+        "std": 3528.399991851227,
+        "count": 6647
+      },
+      "4068": {
+        "mean": -22.23365327124928,
+        "std": 1870.760371621122,
+        "count": 8234
+      },
+      "4360": {
+        "mean": -19.948374194867696,
+        "std": 3199.3243540059902,
+        "count": 9730
+      },
+      "7100": {
+        "mean": 6.798053452446612,
+        "std": 1582.2733292372288,
+        "count": 10161
+      },
+      "7405": {
+        "mean": 17.516824530425943,
+        "std": 1042.531125490277,
+        "count": 18518
+      },
+      "7750": {
+        "mean": 19.440433168624885,
+        "std": 1763.7239374676938,
+        "count": 9408
+      },
+      "7784": {
+        "mean": -13.471242368693684,
+        "std": 2770.473962551174,
+        "count": 28585
+      },
+      "8000": {
+        "mean": -16.03638134965703,
+        "std": 4000.389184974214,
+        "count": 11794
+      }
+    },
+    "zipcodes_tested": 20
+  },
+  "gender_risk_test": {
+    "test_name": "Chi-square (Frequency) & Mann-Whitney U (Severity)",
+    "null_hypothesis": "There is no significant risk difference between Women and men",
+    "frequency_test": "Chi-square",
+    "frequency_statistic": 0.003704891861036439,
+    "frequency_p_value": 0.9514644755420456,
+    "severity_test": "Mann-Whitney U",
+    "severity_statistic": 791.5,
+    "severity_p_value": 0.22351273500106295,
+    "alpha": 0.05,
+    "reject_null": "False",
+    "conclusion": "Fail to reject H0: No significant risk differences between genders",
+    "female_frequency": 0.002072538860103627,
+    "male_frequency": 0.0021953896816684962,
+    "female_severity": 17874.72130325815,
+    "male_severity": 14858.552293766337,
+    "frequency_difference": 0.0001228508215648694,
+    "severity_difference": 3016.169009491812,
+    "female_count": 6755,
+    "male_count": 42817
+  }
+}
