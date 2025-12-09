@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from alphacare.data import DataLoader
 from alphacare.eda import EDAAnalyzer
-from alphacare.statistics import HypothesisTester
+from alphacare.statistics import ABRiskHypothesisTester
 from alphacare.models import LinearRegressionModel, ModelTrainer
 from alphacare.utils import setup_logging
 
@@ -51,9 +51,9 @@ def main():
     loss_ratio_by_group = eda.calculate_loss_ratio(group_by=["Province", "VehicleType"])
     print(f"✓ Calculated loss ratio by Province and VehicleType")
     
-    # Step 3: Hypothesis Testing
-    print("\n[Step 3] Performing Hypothesis Tests...")
-    tester = HypothesisTester(processed_data, alpha=0.05)
+    # Step 3: A/B Risk Hypothesis Testing
+    print("\n[Step 3] Performing A/B Risk Hypothesis Tests...")
+    tester = ABRiskHypothesisTester(processed_data, alpha=0.05)
     test_results = tester.run_all_tests()
     
     # Print test summaries

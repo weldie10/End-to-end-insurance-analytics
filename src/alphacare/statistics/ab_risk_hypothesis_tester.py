@@ -1,8 +1,11 @@
 """
-Hypothesis Testing Module
+A/B Risk Hypothesis Testing Module
 
-This module provides the HypothesisTester class for performing A/B tests
-and statistical hypothesis testing on insurance data.
+This module provides the ABRiskHypothesisTester class for performing A/B tests
+and statistical hypothesis testing on insurance risk data.
+
+The class tests risk differences across various dimensions (provinces, zipcodes, gender)
+using Claim Frequency and Claim Severity metrics.
 """
 
 import pandas as pd
@@ -14,12 +17,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class HypothesisTester:
+class ABRiskHypothesisTester:
     """
-    A class for performing statistical hypothesis tests on insurance data.
+    A class for performing A/B statistical hypothesis tests on insurance risk data.
     
     This class provides methods for A/B testing, comparing groups,
-    and testing various hypotheses about risk differences.
+    and testing various hypotheses about risk differences using:
+    - Claim Frequency: proportion of policies with at least one claim
+    - Claim Severity: average claim amount given a claim occurred
+    - Margin: TotalPremium - TotalClaims
     
     Attributes:
         data (pd.DataFrame): The dataset to analyze
@@ -29,7 +35,7 @@ class HypothesisTester:
     
     def __init__(self, data: pd.DataFrame, alpha: float = 0.05):
         """
-        Initialize the HypothesisTester.
+        Initialize the ABRiskHypothesisTester.
         
         Args:
             data: DataFrame containing the insurance data
@@ -46,7 +52,7 @@ class HypothesisTester:
         # Claim Severity: average claim amount for policies with claims
         # Will be calculated per group in tests
         
-        logger.info(f"HypothesisTester initialized with alpha={alpha}")
+        logger.info(f"ABRiskHypothesisTester initialized with alpha={alpha}")
     
     def _calculate_claim_frequency(self, group_data: pd.DataFrame) -> float:
         """Calculate claim frequency (proportion with at least one claim)."""

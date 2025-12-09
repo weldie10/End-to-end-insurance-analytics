@@ -24,7 +24,7 @@ pip install -e .
 ```python
 from alphacare.data import DataLoader
 from alphacare.eda import EDAAnalyzer
-from alphacare.statistics import HypothesisTester
+from alphacare.statistics import ABRiskHypothesisTester
 
 # Load and preprocess data
 loader = DataLoader(data_path="Data")
@@ -35,8 +35,8 @@ processed = loader.preprocess_data()
 eda = EDAAnalyzer(processed)
 loss_ratio = eda.calculate_loss_ratio(group_by=["Province", "VehicleType", "Gender"])
 
-# Run hypothesis tests
-tester = HypothesisTester(processed, alpha=0.05)
+# Run A/B hypothesis tests for risk drivers
+tester = ABRiskHypothesisTester(processed, alpha=0.05)
 results = tester.run_all_tests()
 ```
 
@@ -53,7 +53,7 @@ Data/              # Source data files
 
 - **`DataLoader`**: Data loading and preprocessing
 - **`EDAAnalyzer`**: Exploratory data analysis and visualizations
-- **`HypothesisTester`**: Statistical hypothesis testing
+- **`ABRiskHypothesisTester`**: A/B statistical hypothesis testing for risk drivers (Claim Frequency & Severity)
 - **`LinearRegressionModel`**: Zipcode-based claim prediction
 - **`ModelTrainer`**: Premium prediction models
 

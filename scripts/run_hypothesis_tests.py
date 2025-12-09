@@ -25,7 +25,7 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from alphacare.data import DataLoader
-from alphacare.statistics import HypothesisTester
+from alphacare.statistics import ABRiskHypothesisTester
 from alphacare.utils import setup_logging
 
 # Setup logging
@@ -261,7 +261,7 @@ def analyze_gender_results(result: dict) -> str:
     return "\n".join(output)
 
 
-def generate_visualizations(tester: HypothesisTester, output_dir: Path):
+def generate_visualizations(tester: ABRiskHypothesisTester, output_dir: Path):
     """Generate visualizations for hypothesis test results."""
     output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -386,10 +386,10 @@ def main():
     print(f"✓ Loaded {len(processed_data):,} records")
     print(f"✓ Columns: {len(processed_data.columns)}")
     
-    # Step 2: Initialize Hypothesis Tester
-    print_section("Step 2: Initialize Hypothesis Tester")
-    tester = HypothesisTester(processed_data, alpha=0.05)
-    print(f"✓ Hypothesis tester initialized with α = 0.05")
+    # Step 2: Initialize A/B Risk Hypothesis Tester
+    print_section("Step 2: Initialize A/B Risk Hypothesis Tester")
+    tester = ABRiskHypothesisTester(processed_data, alpha=0.05)
+    print(f"✓ A/B Risk Hypothesis Tester initialized with α = 0.05")
     
     # Step 3: Run all hypothesis tests
     print_section("Step 3: Running Hypothesis Tests")

@@ -1,6 +1,9 @@
-"""Statistical testing and hypothesis testing modules."""
+"""Statistical testing and A/B risk hypothesis testing modules."""
 
-from .hypothesis_tester import HypothesisTester
+from .ab_risk_hypothesis_tester import ABRiskHypothesisTester
 
-__all__ = ["HypothesisTester"]
+# Backward compatibility alias
+HypothesisTester = ABRiskHypothesisTester
+
+__all__ = ["ABRiskHypothesisTester", "HypothesisTester"]
 
