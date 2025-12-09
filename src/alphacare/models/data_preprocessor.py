@@ -61,36 +61,48 @@ class InsuranceDataPreprocessor:
             current_year = 2015  # Based on data period
             df["VehicleAge"] = current_year - df["RegistrationYear"]
             df["VehicleAge"] = df["VehicleAge"].clip(lower=0, upper=50)  # Cap at 50 years
+            df["VehicleAge"] = df["VehicleAge"].fillna(0)  # Fill any NaN with 0
         
         # Premium-to-value ratio
         if "TotalPremium" in df.columns and "SumInsured" in df.columns:
-            df["PremiumToInsuredRatio"] = df["TotalPremium"] / (df["SumInsured"] + 1)
+            df["PremiumToInsuredRatio"] = df["TotalPremium"] / (df["SumInsured"].replace(0, 1) + 1)
+            df["PremiumToInsuredRatio"] = df["PremiumToInsuredRatio"].replace([np.inf, -np.inf], 0).fillna(0)
         
         # Claim frequency indicator (if we have historical data)
         if "TotalClaims" in df.columns:
             df["HasClaim"] = (df["TotalClaims"] > 0).astype(int)
-            df["ClaimAmount"] = df["TotalClaims"].clip(lower=0)
+            df["ClaimAmount"] = df["TotalClaims"].clip(lower=0).fillna(0)
         
         # Margin calculation
         if "TotalPremium" in df.columns and "TotalClaims" in df.columns:
-            df["Margin"] = df["TotalPremium"] - df["TotalClaims"]
-            df["LossRatio"] = df["TotalClaims"] / (df["TotalPremium"] + 1)
+            df["Margin"] = (df["TotalPremium"] - df["TotalClaims"]).fillna(0)
+            df["LossRatio"] = (df["TotalClaims"] / (df["TotalPremium"].replace(0, 1) + 1)).replace([np.inf, -np.inf], 0).fillna(0)
         
         # Vehicle value categories
         if "CustomValueEstimate" in df.columns:
-            df["ValueCategory"] = pd.cut(
-                df["CustomValueEstimate"],
-                bins=[0, 50000, 150000, 300000, float('inf')],
-                labels=["Low", "Medium", "High", "VeryHigh"]
-            )
+            try:
+                df["ValueCategory"] = pd.cut(
+                    df["CustomValueEstimate"].fillna(0),
+                    bins=[0, 50000, 150000, 300000, float('inf')],
+                    labels=["Low", "Medium", "High", "VeryHigh"]
+                )
+                df["ValueCategory"] = df["ValueCategory"].fillna("Low")
+            except Exception as e:
+                logger.warning(f"Error creating ValueCategory: {e}")
+                df["ValueCategory"] = "Low"
         
         # Premium categories
         if "TotalPremium" in df.columns:
-            df["PremiumCategory"] = pd.cut(
-                df["TotalPremium"],
-                bins=[-float('inf'), 0, 100, 500, 2000, float('inf')],
-                labels=["Negative", "Low", "Medium", "High", "VeryHigh"]
-            )
+            try:
+                df["PremiumCategory"] = pd.cut(
+                    df["TotalPremium"].fillna(0),
+                    bins=[-float('inf'), 0, 100, 500, 2000, float('inf')],
+                    labels=["Negative", "Low", "Medium", "High", "VeryHigh"]
+                )
+                df["PremiumCategory"] = df["PremiumCategory"].fillna("Low")
+            except Exception as e:
+                logger.warning(f"Error creating PremiumCategory: {e}")
+                df["PremiumCategory"] = "Low"
         
         logger.info(f"Engineered features. New shape: {df.shape}")
         return df
@@ -232,8 +244,28 @@ class InsuranceDataPreprocessor:
         numeric_cols = X.select_dtypes(include=[np.number]).columns
         X = X[numeric_cols]
         
-        # Fill any remaining missing values
-        X = X.fillna(X.median())
+        # Fill any remaining missing values with median, then 0 if still NaN
+        for col in X.columns:
+            if X[col].isnull().sum() > 0:
+                median_val = X[col].median()
+                if pd.isna(median_val):
+                    X[col] = X[col].fillna(0)
+                else:
+                    X[col] = X[col].fillna(median_val)
+        
+        # Replace any remaining inf values with finite values
+        X = X.replace([np.inf, -np.inf], np.nan)
+        X = X.fillna(0)
+        
+        # Final check - drop any rows that still have NaN (shouldn't happen, but safety check)
+        nan_mask = X.isnull().any(axis=1)
+        if nan_mask.sum() > 0:
+            logger.warning(f"Dropping {nan_mask.sum()} rows with NaN values after preprocessing")
+            X = X[~nan_mask]
+            y = y[~nan_mask]
+        
+        # Ensure all values are finite
+        X = X.replace([np.inf, -np.inf], 0)
         
         self.feature_names = list(X.columns)
         logger.info(f"Prepared {len(X)} samples with {len(X.columns)} features")
@@ -251,14 +283,23 @@ class InsuranceDataPreprocessor:
         Returns:
             Tuple: Scaled training and test features
         """
+        # Ensure no NaN or inf values before scaling
+        X_train = X_train.replace([np.inf, -np.inf], np.nan).fillna(0)
+        if X_test is not None:
+            X_test = X_test.replace([np.inf, -np.inf], np.nan).fillna(0)
+        
         if not self.is_fitted:
             X_train_scaled = self.scaler.fit_transform(X_train)
+            # Replace any NaN or inf that might result from scaling
+            X_train_scaled = np.nan_to_num(X_train_scaled, nan=0.0, posinf=0.0, neginf=0.0)
             self.is_fitted = True
         else:
             X_train_scaled = self.scaler.transform(X_train)
+            X_train_scaled = np.nan_to_num(X_train_scaled, nan=0.0, posinf=0.0, neginf=0.0)
         
         if X_test is not None:
             X_test_scaled = self.scaler.transform(X_test)
+            X_test_scaled = np.nan_to_num(X_test_scaled, nan=0.0, posinf=0.0, neginf=0.0)
             return X_train_scaled, X_test_scaled
         
         return X_train_scaled, None

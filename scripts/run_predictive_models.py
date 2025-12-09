@@ -221,10 +221,26 @@ def train_and_evaluate_claim_probability_models(
         X, y, test_size=0.2, random_state=42, stratify=y
     )
     
+    # Final NaN check before scaling
+    if X_train.isnull().sum().sum() > 0:
+        logger.warning(f"Found {X_train.isnull().sum().sum()} NaN values in X_train, filling with 0")
+        X_train = X_train.fillna(0)
+    if X_test.isnull().sum().sum() > 0:
+        logger.warning(f"Found {X_test.isnull().sum().sum()} NaN values in X_test, filling with 0")
+        X_test = X_test.fillna(0)
+    
+    # Replace inf values
+    X_train = X_train.replace([np.inf, -np.inf], 0)
+    X_test = X_test.replace([np.inf, -np.inf], 0)
+    
     # Scale features
     X_train_scaled, X_test_scaled = preprocessor.scale_features(X_train, X_test)
     X_train_scaled = pd.DataFrame(X_train_scaled, columns=X.columns, index=X_train.index)
     X_test_scaled = pd.DataFrame(X_test_scaled, columns=X.columns, index=X_test.index)
+    
+    # Final validation
+    assert not np.isnan(X_train_scaled.values).any(), "NaN values found in X_train_scaled"
+    assert not np.isinf(X_train_scaled.values).any(), "Inf values found in X_train_scaled"
     
     models_to_train = ['logistic', 'random_forest', 'xgboost']
     results = {}
